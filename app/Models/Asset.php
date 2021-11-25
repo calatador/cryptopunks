@@ -169,15 +169,24 @@ class Asset extends Model
 
     public function getLiveHistory(){
 
-        $curl_handle=curl_init();
-        curl_setopt($curl_handle, CURLOPT_URL,'https://www.larvalabs.com/cryptopunks/details/'.$this->num);
-        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
-        $data = curl_exec($curl_handle);
-        curl_close($curl_handle);
+        do {
+            $curl_handle = curl_init();
+            curl_setopt($curl_handle, CURLOPT_URL, 'https://www.larvalabs.com/cryptopunks/details/' . $this->num);
+            curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+            $data = curl_exec($curl_handle);
+            curl_close($curl_handle);
 
-        echo $data;
+            $a = str_contains($data, 'Too Many Requests');
+            if ($a) {
+                echo 'oups';
+                sleep(5);
+            }
+
+        } while (!$a);
+
+
 
 
 
