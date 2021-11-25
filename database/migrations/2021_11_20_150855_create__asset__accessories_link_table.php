@@ -17,16 +17,18 @@ class CreateAssetAccessoriesLinkTable extends Migration
             $table->id();
 
             $table->integer('num');
+  /*
             $table->foreign('num')
                 ->references('num')
                 ->on('assets')->onDelete('cascade');
-
+*/
 
             $table->string('name');
+            /*
             $table->foreign('name')
                 ->references('name')
                 ->on('asset_accessories')->onDelete('cascade');
-
+*/
             $table->timestamps();
         });
     }
