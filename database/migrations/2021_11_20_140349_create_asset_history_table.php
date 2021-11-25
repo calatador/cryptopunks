@@ -25,7 +25,7 @@ class CreateAssetHistoryTable extends Migration
             $table->string('track');
             $table->integer('sync')->default('0');
             $table->timestamps();
-           $table->foreign('asset_id')->references('id')->on('assets');
+       //    $table->foreign('asset_id')->references('id')->on('assets');
 
         });
     }
