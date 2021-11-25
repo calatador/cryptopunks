@@ -87,8 +87,8 @@ class CronController extends Controller
 
 
         public function syncPrice(){
+        $arr = ['Sold' , 'Offered' , 'Transfer' , 'Claimed' , 'Offer Withdrawn' , '(Unwrap)' , '(Wrap)'];
             $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
-
             $i = 0;
             foreach ($historys as $h){
                 $i++;
@@ -96,7 +96,7 @@ class CronController extends Controller
                     sleep(20);
                     $i = 0;
                 }
-                $url = "https://etherscan.io/tx/" . $h->track;
+                $url =  $h->trackurl;
                 $context = stream_context_create(
                     array(
                         "http" => array(
@@ -105,9 +105,23 @@ class CronController extends Controller
                     )
                 );
                 echo '<pre>';
+                do {
+                    $curl_handle = curl_init();
+                    curl_setopt($curl_handle, CURLOPT_URL, $url);
+                    curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+                    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+                    curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+                    $data = curl_exec($curl_handle);
+                    curl_close($curl_handle);
+                    $a = str_contains($data, 'far fa-clock small mr-1');
+                    if (!$a) {
+                        echo 'oups';
+                        sleep(20);
+                    }
+                } while (!$a);
 
 
-                $data = file_get_contents($url , false , $context );
+
                 $data = explode( "<i class='far fa-clock small mr-1'></i>" , $data );
                 if( isset($data[1] )){
                 $data = explode( "</div>" , $data[1] );
@@ -117,7 +131,6 @@ class CronController extends Controller
                 $date = date('Y-m-d H:i:s', strtotime($data[0]));
                 $h->txn = $date;
                 $h->sync = 1;
-
                 $h->update();
                 }
             }
