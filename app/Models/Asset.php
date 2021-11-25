@@ -184,7 +184,7 @@ class Asset extends Model
                 sleep(5);
             }
 
-        } while (!$a);
+        } while ($a);
 
 
 
