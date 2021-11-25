@@ -23,6 +23,7 @@ class CreateAssetHistoryTable extends Migration
             $table->double('usd');
             $table->dateTime('txn');
             $table->string('track');
+            $table->string('trackurl')->nullable();
             $table->integer('sync')->default('0');
             $table->timestamps();
        //    $table->foreign('asset_id')->references('id')->on('assets');
