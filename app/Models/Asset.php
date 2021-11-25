@@ -169,7 +169,6 @@ class Asset extends Model
 
     public function getLiveHistory(){
 
-
         $curl_handle=curl_init();
         curl_setopt($curl_handle, CURLOPT_URL,'https://www.larvalabs.com/cryptopunks/details/'.$this->num);
         curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -177,6 +176,10 @@ class Asset extends Model
         curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
         $data = curl_exec($curl_handle);
         curl_close($curl_handle);
+
+        echo $data;
+
+
 
 
 
