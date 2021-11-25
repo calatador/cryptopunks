@@ -168,7 +168,18 @@ class Asset extends Model
 
 
     public function getLiveHistory(){
-        $data = file_get_contents('https://www.larvalabs.com/cryptopunks/details/'.$this->num, false);
+
+
+        $curl_handle=curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL,'https://www.larvalabs.com/cryptopunks/details/'.$this->num);
+        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+        $data = curl_exec($curl_handle);
+        curl_close($curl_handle);
+
+
+
         $first_step = explode( '<div id="punkHistory">' , $data );
         $second_step = explode("</div>" , $first_step[1] );
         $first_step = explode( '<div class="table-responsive">' , $data );
