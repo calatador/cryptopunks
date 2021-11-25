@@ -92,6 +92,8 @@ class Asset extends Model
                         $history->txn = $date_input;
                         // $history->txn = $item[5];
                         $history->track = $item[6];
+                        $history->trackurl = $item[7];
+
                         $history->save();
                     }else{
                         $history = new AssetHistory();
@@ -105,66 +107,13 @@ class Asset extends Model
                         $history->txn = $date_input;
                         //  $history->txn = $item[5];
                         $history->track = $item[6];
+                        $history->trackurl = $item[7];
+
                         $history->save();
                     }
                 }
             }
     }
-
-
-    /*
-    static function assetInit($data , $id){
-        $asset = Asset::where('num' , '=' , $id)->first();
-        if( $asset instanceof Asset){
-
-        }else{
-            $asset = new Asset();
-            $asset->num = $id;
-            $asset->name = 'punk_'. $id;
-            $asset->image = $data->image;
-            $asset->save();
-            foreach ( $data->accessories as $acc){
-                $accessoire = AssetAccessories::where('name' , '=' , $acc)->first();
-                $asset->accessoires()->attach($accessoire->id);
-            }
-            $history = $asset->getLiveHistory();
-            foreach ($history as $item){
-                if( isset($item[3]['eth'])){
-                    $history = new AssetHistory();
-                    $history->asset_id = $asset->num ;
-                    $history->type  = $item[0] ;
-                    $history->From = $item[1] ;
-                    $history->to = $item[2] ;
-                    $history->eth = $item[3]['eth'];
-                    $history->usd = $item[3]['usd'];
-                    //$date_input = date('Y-m-d' , strtotime($item[4]) );
-                    // $history->txn = $date_input;
-                   // echo '<pre>';
-                   // var_dump($item);
-                   // die();
-                    $history->txn = $item[5];
-                    $history->track = $item[6];
-
-                    $history->save();
-                }else{
-                    $history = new AssetHistory();
-                    $history->asset_id = $asset->num ;
-                    $history->type  = $item[0] ;
-                    $history->From = $item[1] ;
-                    $history->to = $item[2] ;
-                    $history->eth = -1;
-                    $history->usd = -1;
-                  //  $date_input = date('Y-m-d' , strtotime($item[4]) );
-                  //  $history->txn = $date_input;
-                    $history->txn = $item[5];
-                    $history->track = $item[6];
-                    $history->save();
-                }
-
-            }
-        }
-    }
-    */
 
 
     public function getLiveHistory(){
@@ -215,6 +164,8 @@ class Asset extends Model
                 $href = $sNodeDetail->firstChild->getAttribute('href');
                 $aDataTableDetailHTML[$j][] =  str_replace("https://etherscan.io/tx/a", "", "$href");
                 $aDataTableDetailHTML[$j][] =  str_replace("https://etherscan.io/tx/", "", "$href");
+                $aDataTableDetailHTML[$j][] = $href;
+
                 $t = 0;
             }else{
                 $t = $t + 1;
@@ -223,25 +174,7 @@ class Asset extends Model
             $j = $i % count($aDataTableHeaderHTML) == 0 ? $j + 1 : $j;
         }
         foreach ($aDataTableDetailHTML as $key => $item){
-            /*
-            sleep(4);
-             $context = stream_context_create(
-                 array(
-                     "http" => array(
-                         "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
-                     )
-                 )
-             );
-             $data = file_get_contents($item[5] , false , $context );
-             $data = explode( "<i class='far fa-clock small mr-1'></i>" , $data );
-             $data = explode( "</div>" , $data[1] );
-             $data = explode( "(" , $data[0] );
-             $data = explode( ")" , $data[1] );
-             $data = explode( " +" , $data[0] );
-             $date = date('Y-m-d H:i:s', strtotime($data[0]));
-             $item[5]  = $date;
-             $aDataTableDetailHTML[$key][5] = $item[5];
-                */
+
              if( $item[3] != ''){
                 $prices = explode(" ", $item[3]);
                 $f1 = 1;
