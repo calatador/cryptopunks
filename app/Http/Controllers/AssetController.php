@@ -1,0 +1,221 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\AssetHistory;
+use Illuminate\Http\Request;
+use DOMDocument;
+use App\Models\AssetAccessories;
+use App\Models\Asset;
+
+class AssetController extends Controller
+{
+
+    public function welcome (){
+        $aesst = Asset::get();
+        $aesst = count($aesst);
+        $history = AssetHistory::count();
+        $historySync = AssetHistory::where( 'sync' , '=' , '1')->count();
+
+        return view('welcome' , ['aesst' => $aesst , 'history' => $history , 'historySync' => $historySync ]);
+    }
+
+    public function listing(Request $request){
+        define( 'WP_MEMORY_LIMIT', '2560M' );
+        set_time_limit(0);
+        $pageTitle = "cryptopunks";
+        $selectedDate = $request->input('date');
+        $selectedAssets = $request->input('assets');
+        if( $selectedAssets == null){
+            $selectedAssets = [];
+        }
+        if( $selectedDate != null) {
+            $date = date('Y-m-d', strtotime($selectedDate));
+        }else{
+            $date = date('Y-m-d', time() );
+        }
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+
+        $assets = Asset::whereHas('accessoires', function($q) use($selectedAssets) {
+            $q->whereIn('asset_accessories.name', $selectedAssets);
+        })->get();
+
+
+
+
+         $options = AssetAccessories::all();
+         foreach ($assets as $asset ){
+             $as = $asset->dateCondition($date)->get();
+             $asset->price = -1 ;
+             foreach ($as as $s ) {
+                 if ( ($s->type == 'Bid') or ($s->type == 'Bid *')){
+
+                 } elseif ( ($s->type == 'Bid Withdrawn') ) {
+
+                 } elseif ( $s->type == 'Offered') {
+                     $asset->price = $s->eth;
+                     break;
+                 } elseif ( $s->type == 'Sold') {
+                      break;
+                 } else{
+                   //  var_dump($s->type);die();
+                   //  $asset->price = -1 ;
+                    break;
+                 }
+             }
+          }
+         foreach ($assets as $key => $asset){
+             if( $asset->price == -1){
+                 $assets->forget($key);
+             }
+         }
+        $assets = $assets->sortBy('price');
+        return view('listing' , ['pageTitle' => $pageTitle , 'asssets' => $assets , 'options' => $options]);
+
+    }
+
+    public function month(Request $request){
+      //  define( 'WP_MEMORY_LIMIT', '2560M' );
+        $pageTitle = "cryptopunks";
+        $dateinit = date('Y-m-d', time() );
+
+
+        $selectedAssets = $request->input('assets');
+        if( $selectedAssets == null){
+            $selectedAssets = ['Smile'];
+        }else{
+            var_dump($selectedAssets);
+         }
+
+        $assets = Asset::whereHas('accessoires', function($q) use($selectedAssets) {
+            $q->whereIn('asset_accessories.name', $selectedAssets);
+        })->get();
+
+
+        $assetsArr = [];
+        foreach ($assets as $key => $asset){
+            $date = $dateinit;
+            $priceArr = [];
+            for( $i = 0 ; $i < 31 ; $i++){
+             $nbr = ( $i == 0) ? 0 : 1 ;
+             $date = date('Y-m-d H:i:s', strtotime($date . ' -'.$nbr.' day'));
+             $as = $asset->dateCondition($date)->get();
+             $priceArr[$date] = ['price' => -1 , 'punk' => $asset , 'date' => $date];
+             foreach ($as as $s ) {
+                 if ( ($s->type == 'Bid') or ($s->type == 'Bid *')){
+
+                 } elseif ( ($s->type == 'Bid Withdrawn') ) {
+
+                 } elseif ( $s->type == 'Offered') {
+                     $priceArr[$date]  = ['price' => $s->eth , 'punk' => $asset , 'date' => $date] ;
+                     break;
+                 } elseif ( $s->type == 'Sold') {
+                     break;
+                 } else{
+                     break;
+                 }
+             }
+         }
+            $assetsArr [$asset->num] = $priceArr;
+        }
+
+        $minArr = [];
+        $date = $dateinit;
+        for( $i = 0 ; $i < 31 ; $i++){
+            $nbr = ( $i == 0) ? 0 : 1 ;
+            $date = date('Y-m-d H:i:s', strtotime($date . ' -'.$nbr.' day'));
+            $minArr[$date]  =  null;
+            foreach ($assetsArr as $arr){
+                if ( $arr[$date]['price'] != -1 ){
+                    if( $minArr[$date] == null){
+                        $minArr[$date] = $arr[$date];
+                    }else{
+                        $minArr[$date] = (( $minArr[$date]['price'] > $arr[$date]['price'] ) ? $arr[$date] : $minArr[$date] ) ;
+                    }
+                }
+
+            }
+
+        }
+        $options = AssetAccessories::all();
+        return view('month' , ['pageTitle' => $pageTitle , 'minArr' => $minArr , 'options' => $options]);
+    }
+
+    public function cryptopunks(){
+        $assets = Asset::limit(250)->simplePaginate(15);
+        return view('cryptopunks' , ['assets' => $assets ]);
+    }
+
+    public function cryptopunk(Request $request){
+        $id = $request->input('id');
+        $asset = Asset::where('num' , '=' , $id)->first();
+
+        if( $asset instanceof Asset){
+            return view('cryptopunk' , ['asset' => $asset ]);
+        }
+        $assets = Asset::limit(250)->simplePaginate(15);
+        return view('cryptopunks' , ['assets' => $assets ]);
+    }
+
+
+    public function test(Request $request){
+        $nbrDays = 30;
+        $name = 'Beanie';
+        $names = array("Beanie", "Choker", "Pilot Helmet", "Tiara", "Orange Side", "Buck Teeth", "Welding Goggles", "Pigtails", "Pink With Hat", "Top Hat", "Spots", "Rosy Cheeks", "Blonde Short", "Wild White Hair", "Cowboy Hat", "Wild Blonde", "Straight Hair Blonde", "Big Beard", "Red Mohawk", "Half Shaved", "Blonde Bob", "Vampire Hair", "Clown Hair Green", "Straight Hair Dark", "Straight Hair", "Silver Chain", "Dark Hair", "Purple Hair", "Gold Chain", "Medical Mask", "Tassle Hat", "Fedora", "Police Cap", "Clown Nose", "Smile", "Cap Forward", "Hoodie", "Front Beard Dark", "Frown", "Purple Eye Shadow", "Handlebars", "Blue Eye Shadow", "Green Eye Shadow", "Vape", "Front Beard", "Chinstrap", "3D Glasses", "Luxurious Beard", "Mustache", "Normal Beard Black", "Normal Beard", "Eye Mask", "Goat", "Do-rag", "Shaved Head", "Muttonchops", "Peak Spike", "Pipe", "VR", "Cap", "Small Shades", "Clown Eyes Green", "Clown Eyes Blue", "Headband", "Crazy Hair", "Knitted Cap", "Mohawk Dark", "Mohawk", "Mohawk Thin", "Frumpy Hair", "Wild Hair", "Messy Hair", "Eye Patch", "Stringy Hair", "Bandana", "Classic Shades", "Shadow Beard", "Regular Shades", "Horned Rim Glasses", "Big Shades", "Nerd Glasses", "Black Lipstick", "Mole", "Purple Lipstick", "Hot Lipstick", "Cigarette", "Earring");
+        $time_start = microtime(true);
+        $result = '';
+         $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+
+        set_time_limit(0);
+
+        foreach ( $names as $name) {
+            $dateinit = date('Y-m-d', time());
+            $date = $dateinit;
+            for ($i = 0; $i < $nbrDays; $i++) {
+                $min = null;
+                //find date to find assets
+                $nbr = ($i == 0) ? 0 : 1;
+                $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
+                $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
+                $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
+                    $q->where('asset_accessories.name', '=', $name);
+                })->whereHas('last_price', function ($c) use ($date) {
+                    $c->where('txn', '<', $date);
+                })
+                    ->with('last_price', function ($c) use ($date) {
+                   $c->where('txn', '<', $date);
+                })
+                    ->get();
+                foreach ($assets as $key => $asset) {
+                    if   ($asset->last_price == null)  {
+                    $assets->forget($key);
+                    } elseif ( $asset->last_price->type != 'Offered') {
+                        $assets->forget($key);
+                    }
+                }
+                foreach ($assets as $asset) {
+                    if( $min == null){
+                        $min = $asset->last_price->eth;
+                    }else{
+                    $min = ($min > $asset->last_price->eth) ? $asset->last_price->eth : $min;
+                    }
+                  //   echo $date . ' :  num => ' .$asset->num . ' price' . $asset->last_price->eth . 'date => ' . $asset->last_price->txn ;
+                     //      echo $date . '-    '. $asset->id . ' : ' .$asset->last_price->eth . $asset->last_price->type . $asset->last_price->id;
+                 //    echo '<br>';
+                }
+
+
+                $result = $result . '<br>'. $date . '=>' . $name . '=>' . $min ;
+
+            }
+        }
+
+        fwrite($myfile, $result);
+        fclose($myfile);
+
+
+    }
+
+}
