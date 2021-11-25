@@ -67,8 +67,8 @@ class CronController extends Controller
                 foreach ( $json_data as $key => $json) {
                     $id = intval($key);
                     Asset::assetSecInit($json, $id);
-                    $optionSatus->values = $id;
-                    $optionSatus->save();
+                //    $optionSatus->values = $id;
+                //    $optionSatus->save();
 
                 }
                 echo 'done';
