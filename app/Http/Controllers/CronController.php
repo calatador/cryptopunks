@@ -92,10 +92,6 @@ class CronController extends Controller
             $i = 0;
             foreach ($historys as $h){
                 $i++;
-                if( $i == 10){
-                    sleep(20);
-                    $i = 0;
-                }
                 $url =  $h->trackurl;
                 $context = stream_context_create(
                     array(
@@ -104,7 +100,7 @@ class CronController extends Controller
                         )
                     )
                 );
-                echo '<pre>';
+
                 do {
                     $curl_handle = curl_init();
                     curl_setopt($curl_handle, CURLOPT_URL, $url);
@@ -113,6 +109,9 @@ class CronController extends Controller
                     curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
                     $data = curl_exec($curl_handle);
                     curl_close($curl_handle);
+
+                    echo $data;
+                    die();
                     $a = str_contains($data, 'far fa-clock small mr-1');
                     if (!$a) {
                         echo 'oups';
