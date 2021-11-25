@@ -134,7 +134,6 @@ class CronController extends Controller
                 $h->update();
                 }
             }
-
         }
 
 
