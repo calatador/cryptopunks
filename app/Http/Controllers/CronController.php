@@ -129,72 +129,49 @@ class CronController extends Controller
         }
 
 
+    public function syncPrice(){
+        $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
+        $i = 0;
+        foreach ($historys as $h){
+            $url =  $h->trackurl;
 
-    public function syncPrice()
-    {
-        $historys = AssetHistory::where('sync', '=', 0)->get();
-         foreach ($historys as $h) {
-            $url = $h->trackurl;
 
-                      $ch = curl_init($url);
+            do {
+                $agent= 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
 
-// Want to cache clearance cookies ?
-//curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt");
-//curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies.txt");
+                $curl_handle = curl_init();
+                curl_setopt($curl_handle, CURLOPT_URL, $url);
+                curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+                curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl_handle, CURLOPT_USERAGENT, $agent);
+                curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+                $data = curl_exec($curl_handle);
+                curl_close($curl_handle);
 
-             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-             curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-             curl_setopt($ch, CURLOPT_HTTPHEADER,
-                 array(
-                     "Upgrade-Insecure-Requests: 1",
-                     "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36",
-                     "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-                     "Accept-Language: en-US,en;q=0.9"
-                 ));
-
-             $cfCurl = new CFCurlImpl();
-
-             $cfOptions = new UAMOptions();
-             $cfOptions->setVerbose(true);
-// $cfOptions->setDelay(5);
-
-             try {
-                 $page = $cfCurl->exec($ch, $cfOptions);
-
-                 // Want to get clearance cookies ?
-                 //$cookies = curl_getinfo($ch, CURLINFO_COOKIELIST);
-
-             } catch (ErrorException $ex) {
-                 echo "Unknown error -> " . $ex->getMessage();
-             }
+                echo $data;
+                die();
+                $a = str_contains($data, 'far fa-clock small mr-1');
+                if (!$a) {
+                    echo 'oups';
+                    sleep(20);
+                }
+            } while (!$a);
 
 
 
-
-
-
-
-
-
-            var_dump($data);
-            die();
-
-            $data = explode("<i class='far fa-clock small mr-1'></i>", $data);
-            if (isset($data[1])) {
-                $data = explode("</div>", $data[1]);
-                $data = explode("(", $data[0]);
-                $data = explode(")", $data[1]);
-                $data = explode(" +", $data[0]);
+            $data = explode( "<i class='far fa-clock small mr-1'></i>" , $data );
+            if( isset($data[1] )){
+                $data = explode( "</div>" , $data[1] );
+                $data = explode( "(" , $data[0] );
+                $data = explode( ")" , $data[1] );
+                $data = explode( " +" , $data[0] );
                 $date = date('Y-m-d H:i:s', strtotime($data[0]));
                 $h->txn = $date;
                 $h->sync = 1;
-
                 $h->update();
             }
         }
     }
-
 
 
 
