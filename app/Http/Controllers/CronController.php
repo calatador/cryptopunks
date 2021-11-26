@@ -129,13 +129,7 @@ class CronController extends Controller
     public function syncPrice()
     {
         $historys = AssetHistory::where('sync', '=', 0)->get();
-        $i = 0;
-        foreach ($historys as $h) {
-            $i++;
-            if ($i == 10) {
-                sleep(20);
-                $i = 0;
-            }
+         foreach ($historys as $h) {
             $url = $h->trackurl;
             $context = stream_context_create(
                 array(
