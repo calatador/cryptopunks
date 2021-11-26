@@ -101,6 +101,10 @@ class CronController extends Controller
                     curl_close($curl_handle);
                     $data = json_decode($data);
                     $timeStemp = null;
+                    foreach ($data->result as $result ){
+                        $timeStemp = $result->timeStamp;
+                        break;
+                    }
 
                     var_dump($data->result);
 
