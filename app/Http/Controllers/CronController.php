@@ -107,8 +107,8 @@ class CronController extends Controller
                     }
 
                     if( $timeStemp != null){
-                        $date = date('Y-m-d H:i:s', strtotime($data[0]));
-                        var_dump($data);
+                        $date = date('Y-m-d H:i:s', $timeStemp);
+                        var_dump($date);
                         die();
 
                     }
