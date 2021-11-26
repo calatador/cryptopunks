@@ -88,7 +88,6 @@ class CronController extends Controller
 
         public function syncPrice(){
             $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
-            $i = 0;
             foreach ($historys as $h){
                 $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
                 do {
@@ -99,44 +98,26 @@ class CronController extends Controller
                     curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
                     $data = curl_exec($curl_handle);
                     curl_close($curl_handle);
-                    $data = json_decode($data);
-                    $timeStemp = null;
-                    foreach ($data->result as $result ){
-                        $timeStemp = $result->timeStamp;
-                        break;
-                    }
-
-                    if( $timeStemp != null){
-                        $date = date('Y-m-d H:i:s', $timeStemp);
-                        var_dump($date);
-                        die();
-
-                    }
-                    var_dump($timeStemp);
-
-                    die();
-
-
-                    $a = str_contains($data, 'far fa-clock small mr-1');
+                    $a = str_contains($data, 'timeStamp');
                     if (!$a) {
                         echo 'oups';
-                        sleep(20);
+                        sleep(2);
                     }
                 } while (!$a);
 
-
-
-                $data = explode( "<i class='far fa-clock small mr-1'></i>" , $data );
-                if( isset($data[1] )){
-                $data = explode( "</div>" , $data[1] );
-                $data = explode( "(" , $data[0] );
-                $data = explode( ")" , $data[1] );
-                $data = explode( " +" , $data[0] );
-                $date = date('Y-m-d H:i:s', strtotime($data[0]));
-                $h->txn = $date;
-                $h->sync = 1;
-                $h->update();
+                $data = json_decode($data);
+                $timeStemp = null;
+                foreach ($data->result as $result ){
+                    $timeStemp = $result->timeStamp;
+                    break;
                 }
+                if( $timeStemp != null){
+                    $date = date('Y-m-d H:i:s', $timeStemp);
+                    $h->txn = $date;
+                    $h->sync = 1;
+                    $h->update();
+                }
+
             }
         }
 
