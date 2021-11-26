@@ -99,7 +99,7 @@ class CronController extends Controller
                     curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
                     $data = curl_exec($curl_handle);
                     curl_close($curl_handle);
-                    $data = json_decode($data);
+                    $data = json_encode($data);
 
                     echo $data->timeStamp;
                     die();
