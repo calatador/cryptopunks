@@ -101,7 +101,7 @@ class CronController extends Controller
                     curl_close($curl_handle);
                     $data = json_decode($data);
 
-                    var_dump($data);
+                    var_dump($data[0]->timeStamp);
                     die();
 
 
