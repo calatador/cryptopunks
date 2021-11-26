@@ -100,8 +100,13 @@ class CronController extends Controller
                     $data = curl_exec($curl_handle);
                     curl_close($curl_handle);
                     $data = json_decode($data);
+                    $timeStemp = null;
+                    foreach ($data as $d){
+                        $timeStemp = $d->timeStamp;
+                        break;
+                    }
 
-                    var_dump($data[0]->timeStamp);
+                    var_dump($timeStemp);
                     die();
 
 
