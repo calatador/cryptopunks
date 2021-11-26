@@ -153,7 +153,7 @@ class CronController extends Controller
 
              $m = str_contains($data, 'king for could not be found');
             if( $m or $data == false) {
-
+                echo '-';
             }else{
                 $data = json_decode($data);
                 $timeStemp = null;
@@ -177,6 +177,9 @@ class CronController extends Controller
                     $h->txn = $date;
                     $h->sync = 1;
                     $h->update();
+                    echo '+';
+                }else{
+                    echo '-';
                 }
             }
 
