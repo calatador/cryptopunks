@@ -126,16 +126,17 @@ class CronController extends Controller
 
 
 
-    public function syncPrice(){
-        $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
+    public function syncPrice()
+    {
+        $historys = AssetHistory::where('sync', '=', 0)->get();
         $i = 0;
-        foreach ($historys as $h){
+        foreach ($historys as $h) {
             $i++;
-            if( $i == 10){
+            if ($i == 10) {
                 sleep(20);
                 $i = 0;
             }
-            $url =  $h->track;
+            $url = $h->track;
             $context = stream_context_create(
                 array(
                     "http" => array(
@@ -146,17 +147,17 @@ class CronController extends Controller
             echo '<pre>';
 
 
-            $data = file_get_contents($url , false , $context );
+            $data = file_get_contents($url, false, $context);
 
             var_dump($data);
             die();
 
-            $data = explode( "<i class='far fa-clock small mr-1'></i>" , $data );
-            if( isset($data[1] )){
-                $data = explode( "</div>" , $data[1] );
-                $data = explode( "(" , $data[0] );
-                $data = explode( ")" , $data[1] );
-                $data = explode( " +" , $data[0] );
+            $data = explode("<i class='far fa-clock small mr-1'></i>", $data);
+            if (isset($data[1])) {
+                $data = explode("</div>", $data[1]);
+                $data = explode("(", $data[0]);
+                $data = explode(")", $data[1]);
+                $data = explode(" +", $data[0]);
                 $date = date('Y-m-d H:i:s', strtotime($data[0]));
                 $h->txn = $date;
                 $h->sync = 1;
@@ -164,6 +165,7 @@ class CronController extends Controller
                 $h->update();
             }
         }
+    }
 
 
 }
