@@ -146,6 +146,8 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
 
                 $data = json_decode($data);
 
+var_dump($data);
+
                 $timeStemp = null;
                 foreach ($data as $key => $result ){
                     if(( $key == "data") && ( $timeStemp == null) ){
@@ -170,9 +172,6 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
                 }
 
             }
-
-
-
 
         }
     }
