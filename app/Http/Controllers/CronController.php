@@ -153,7 +153,7 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
                         foreach ($result as $mkey => $tansations){
                             if( $mkey == $h->track){
                                 foreach ($tansations as $tansation){
-                                    var_dump($tansation);
+                                    var_dump($tansation->time);
                                     die();
                                 }
                             }
