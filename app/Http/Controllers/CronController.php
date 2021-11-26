@@ -90,7 +90,7 @@ class CronController extends Controller
             $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
             foreach ($historys as $h){
                 $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
-                do {
+
                     $curl_handle = curl_init();
                     curl_setopt($curl_handle, CURLOPT_URL, $url);
                     curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
@@ -100,26 +100,25 @@ class CronController extends Controller
                     curl_close($curl_handle);
                     echo  $data;
                     $a = str_contains($data, 'timeStamp');
-                    if (!$a) {
-                        echo $url;
-                        echo "\n";
-                        echo 'oups';
-                        sleep(2);
-                    }
-                } while (!$a);
+                    if ($a) {
 
-                $data = json_decode($data);
-                $timeStemp = null;
-                foreach ($data->result as $result ){
-                    $timeStemp = $result->timeStamp;
-                    break;
-                }
-                if( $timeStemp != null){
-                    $date = date('Y-m-d H:i:s', $timeStemp);
-                    $h->txn = $date;
-                    $h->sync = 1;
-                    $h->update();
-                }
+                        $data = json_decode($data);
+                        $timeStemp = null;
+                        foreach ($data->result as $result ){
+                            $timeStemp = $result->timeStamp;
+                            break;
+                        }
+                        if( $timeStemp != null){
+                            $date = date('Y-m-d H:i:s', $timeStemp);
+                            $h->txn = $date;
+                            $h->sync = 1;
+                            $h->update();
+                        }
+
+                    }
+
+
+
 
             }
         }
