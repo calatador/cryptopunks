@@ -11,6 +11,8 @@ use DOMDocument;
 class Minlog extends Model
 {
     use HasFactory;
+    protected $table = 'minlog';
+
 
 
 }
