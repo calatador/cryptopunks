@@ -140,8 +140,9 @@ class CronController extends Controller
             );
             echo '<pre>';
 
+             ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 6.0)');
 
-            $data = file_get_contents($url, true, $context);
+             $data = file_get_contents($url, true, $context);
 
             var_dump($data);
             die();
