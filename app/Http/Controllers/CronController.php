@@ -101,6 +101,8 @@ class CronController extends Controller
                     echo  $data;
                     $a = str_contains($data, 'timeStamp');
                     if (!$a) {
+                        echo $url;
+                        echo "\n";
                         echo 'oups';
                         sleep(2);
                     }
