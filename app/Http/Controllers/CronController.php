@@ -136,7 +136,7 @@ class CronController extends Controller
                 sleep(20);
                 $i = 0;
             }
-            $url = $h->track;
+            $url = $h->trackurl;
             $context = stream_context_create(
                 array(
                     "http" => array(
