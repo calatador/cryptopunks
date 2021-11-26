@@ -150,7 +150,7 @@ class CronController extends Controller
                  }
             }while($a);
 
-            echo '1';
+            var_dump($data);
                 $data = json_decode($data);
                 $timeStemp = null;
                 foreach ($data as $key => $result ){
