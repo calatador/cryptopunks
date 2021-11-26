@@ -129,8 +129,7 @@ class CronController extends Controller
         }
 
     public function syncPrice(){
-        $historys = AssetHistory::where( 'sync' , '=' , 0)
-            ->where('type' , '=' , 'Bid Withdrawn')->get();
+        $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
         foreach ($historys as $h){
           //  $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
 $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."?events=true&erc_20=true&erc_721=true&assets_in_usd=true&effects=true&trace_mempool=true";
