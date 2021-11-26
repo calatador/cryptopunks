@@ -141,7 +141,7 @@ class CronController extends Controller
             echo '<pre>';
 
 
-            $data = file_get_contents($url, false, $context);
+            $data = file_get_contents($url, true, $context);
 
             var_dump($data);
             die();
