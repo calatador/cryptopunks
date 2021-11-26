@@ -153,7 +153,7 @@ class CronController extends Controller
 
             var_dump($data);
             $m = str_contains($data, 'king for could not be found');
-            if( $m) {
+            if( $m or $data == false) {
 
             }else{
                 $data = json_decode($data);
