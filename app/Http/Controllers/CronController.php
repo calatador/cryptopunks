@@ -87,7 +87,8 @@ class CronController extends Controller
 
 
         public function syncPrice(){
-            $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
+            $historys = AssetHistory::where( 'sync' , '=' , 0)
+                ->where('type' , '=' , 'Bid Withdrawn')->get();
             foreach ($historys as $h){
                 $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
 
