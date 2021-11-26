@@ -137,7 +137,7 @@ class CronController extends Controller
 
 
             do {
-                $agent= 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
+                $agent= 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:94.0) Gecko/20100101 Firefox/94.0';
 
                 $curl_handle = curl_init();
                 curl_setopt($curl_handle, CURLOPT_URL, $url);
