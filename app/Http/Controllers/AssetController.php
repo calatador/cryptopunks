@@ -221,15 +221,13 @@ class AssetController extends Controller
                     $log->value = $min;
                     $log->save();
                 }
-                $result = $result . '<br>'. $date . '=>' . $name . '=>' . $min ;
+                echo $result . ' '. $date . '=>' . $name . '=>' . $min ;
+                echo "\n";
 
             }
         }
 
 
-
-        fwrite($myfile, $result);
-        fclose($myfile);
 
 
     }
