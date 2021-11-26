@@ -187,7 +187,6 @@ class CronController extends Controller
 
         // Auth
         if(isset($xpath->query("//input[@name='r']/@value")->item(0)->textContent)){
-
             $action = $url . $xpath->query("//form/@action")->item(0)->textContent;
             $r = $xpath->query("//input[@name='r']/@value")->item(0)->textContent;
             $jschl_vc = $xpath->query("//input[@name='jschl_vc']/@value")->item(0)->textContent;
