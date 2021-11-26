@@ -151,8 +151,7 @@ class CronController extends Controller
                  }
             }while($a);
 
-            var_dump($data);
-            $m = str_contains($data, 'king for could not be found');
+             $m = str_contains($data, 'king for could not be found');
             if( $m or $data == false) {
 
             }else{
