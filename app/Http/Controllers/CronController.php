@@ -141,13 +141,15 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
             curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
             $data = curl_exec($curl_handle);
             curl_close($curl_handle);
-            echo  $data;
 
-            die();
-            $a = str_contains($data, 'timeStamp');
+            $a = str_contains($data, 'time');
             if ($a) {
 
                 $data = json_decode($data);
+
+                var_dump($data);
+                die();
+
                 $timeStemp = null;
                 foreach ($data->result as $result ){
                     $timeStemp = $result->timeStamp;
