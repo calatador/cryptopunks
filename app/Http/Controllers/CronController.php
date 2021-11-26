@@ -106,6 +106,12 @@ class CronController extends Controller
                         break;
                     }
 
+                    if( $timeStemp != null){
+                        $date = date('Y-m-d H:i:s', strtotime($data[0]));
+                        var_dump($data);
+                        die();
+
+                    }
                     var_dump($timeStemp);
 
                     die();
