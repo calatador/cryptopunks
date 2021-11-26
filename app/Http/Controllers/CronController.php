@@ -132,22 +132,25 @@ class CronController extends Controller
         $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
         foreach ($historys as $h){
           //  $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
-$url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."?events=true&erc_20=true&erc_721=true&assets_in_usd=true&effects=true&trace_mempool=true";
-            $curl_handle = curl_init();
-            curl_setopt($curl_handle, CURLOPT_URL, $url);
-            curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
-            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
-            $data = curl_exec($curl_handle);
-            curl_close($curl_handle);
 
-            $a = str_contains($data, 'time');
-            if ($a) {
+            do {
+                $url = "https://api.blockchair.com/ethereum/dashboards/transaction/" . $h->track . "?events=true&erc_20=true&erc_721=true&assets_in_usd=true&effects=true&trace_mempool=true";
+                $curl_handle = curl_init();
+                curl_setopt($curl_handle, CURLOPT_URL, $url);
+                curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+                curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+                $data = curl_exec($curl_handle);
+                curl_close($curl_handle);
+
+                 $a = str_contains($data, 're sending too many requests.');
+                 if( $a){
+                     echo 'oups';
+                     sleep('15');
+                 }
+            }while($a);
 
                 $data = json_decode($data);
-
-var_dump($data);
-
                 $timeStemp = null;
                 foreach ($data as $key => $result ){
                     if(( $key == "data") && ( $timeStemp == null) ){
@@ -171,7 +174,6 @@ var_dump($data);
                     $h->update();
                 }
 
-            }
 
         }
     }
