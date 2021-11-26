@@ -92,7 +92,8 @@ class CronController extends Controller
             $i = 0;
             foreach ($historys as $h){
                 $i++;
-                $url =  $h->trackurl;
+               // $url =  $h->trackurl;
+                $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
                 $context = stream_context_create(
                     array(
                         "http" => array(
