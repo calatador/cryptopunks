@@ -149,7 +149,7 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
 
                 $timeStemp = null;
                 foreach ($data as $result ){
-                    var_dump($result);
+                    var_dump($result->transaction);
                     die();
                     $timeStemp = $result->timeStamp;
                     break;
