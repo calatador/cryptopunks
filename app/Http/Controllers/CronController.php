@@ -150,7 +150,10 @@ class CronController extends Controller
                  }
             }while($a);
 
-            var_dump($data);
+            $m = str_contains($data, 'king for could not be found');
+            if( $m) {
+
+            }else{
                 $data = json_decode($data);
                 $timeStemp = null;
                 foreach ($data as $key => $result ){
@@ -174,6 +177,8 @@ class CronController extends Controller
                     $h->sync = 1;
                     $h->update();
                 }
+            }
+
 
 
         }
