@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AssetHistory;
+use App\Models\Minlog;
 use Illuminate\Http\Request;
 use DOMDocument;
 use App\Models\AssetAccessories;
@@ -161,7 +162,7 @@ class AssetController extends Controller
 
 
     public function test(Request $request){
-        $nbrDays = 30;
+        $nbrDays = 100;
         $name = 'Beanie';
         $names = array("Beanie", "Choker", "Pilot Helmet", "Tiara", "Orange Side", "Buck Teeth", "Welding Goggles", "Pigtails", "Pink With Hat", "Top Hat", "Spots", "Rosy Cheeks", "Blonde Short", "Wild White Hair", "Cowboy Hat", "Wild Blonde", "Straight Hair Blonde", "Big Beard", "Red Mohawk", "Half Shaved", "Blonde Bob", "Vampire Hair", "Clown Hair Green", "Straight Hair Dark", "Straight Hair", "Silver Chain", "Dark Hair", "Purple Hair", "Gold Chain", "Medical Mask", "Tassle Hat", "Fedora", "Police Cap", "Clown Nose", "Smile", "Cap Forward", "Hoodie", "Front Beard Dark", "Frown", "Purple Eye Shadow", "Handlebars", "Blue Eye Shadow", "Green Eye Shadow", "Vape", "Front Beard", "Chinstrap", "3D Glasses", "Luxurious Beard", "Mustache", "Normal Beard Black", "Normal Beard", "Eye Mask", "Goat", "Do-rag", "Shaved Head", "Muttonchops", "Peak Spike", "Pipe", "VR", "Cap", "Small Shades", "Clown Eyes Green", "Clown Eyes Blue", "Headband", "Crazy Hair", "Knitted Cap", "Mohawk Dark", "Mohawk", "Mohawk Thin", "Frumpy Hair", "Wild Hair", "Messy Hair", "Eye Patch", "Stringy Hair", "Bandana", "Classic Shades", "Shadow Beard", "Regular Shades", "Horned Rim Glasses", "Big Shades", "Nerd Glasses", "Black Lipstick", "Mole", "Purple Lipstick", "Hot Lipstick", "Cigarette", "Earring");
         $time_start = microtime(true);
@@ -182,10 +183,10 @@ class AssetController extends Controller
                 $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                     $q->where('asset_accessories.name', '=', $name);
                 })->whereHas('last_price', function ($c) use ($date) {
-                    $c->where('txn', '<', $date);
+                    $c->where('txn', '<=', $date);
                 })
                     ->with('last_price', function ($c) use ($date) {
-                   $c->where('txn', '<', $date);
+                   $c->where('txn', '<=', $date);
                 })
                     ->get();
                 foreach ($assets as $key => $asset) {
@@ -207,10 +208,23 @@ class AssetController extends Controller
                 }
 
 
+                $log = Minlog::where('date' , '=' , $date)->where('accessorie' , '=' ,$name)->first();
+                if( $log instanceof  Minlog){
+                    $log->value = $min;
+                    $log->save();
+                }else{
+                    $log = new Minlog();
+                    $log->date = $date;
+                    $log->accessorie = $name;
+                    $log->value = $min;
+                    $log->save();
+                }
                 $result = $result . '<br>'. $date . '=>' . $name . '=>' . $min ;
 
             }
         }
+
+
 
         fwrite($myfile, $result);
         fclose($myfile);
