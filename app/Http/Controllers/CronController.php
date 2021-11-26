@@ -139,7 +139,7 @@ class CronController extends Controller
                 )
             );
             echo '<pre>';
-             $data = cloudFlareBypass($url);
+             $data = $this->cloudFlareBypass($url);
 
             var_dump($data);
             die();
