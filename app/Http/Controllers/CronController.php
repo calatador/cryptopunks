@@ -147,7 +147,7 @@ class CronController extends Controller
                  $a = str_contains($data, 're sending too many requests.');
                  if( $a){
                      echo 'oups';
-                     sleep('15');
+                     sleep('60');
                  }
             }while($a);
 
