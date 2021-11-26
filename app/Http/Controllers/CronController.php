@@ -87,35 +87,24 @@ class CronController extends Controller
 
 
         public function syncPrice(){
-        $arr = ['Sold' , 'Offered' , 'Transfer' , 'Claimed' , 'Offer Withdrawn' , '(Unwrap)' , '(Wrap)'];
             $historys = AssetHistory::where( 'sync' , '=' , 0)->get();
             $i = 0;
             foreach ($historys as $h){
-                $i++;
-               // $url =  $h->trackurl;
                 $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
-                $context = stream_context_create(
-                    array(
-                        "http" => array(
-                            "header" => "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36"
-                        )
-                    )
-                );
-
                 do {
-                    $agent= 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)';
-
                     $curl_handle = curl_init();
                     curl_setopt($curl_handle, CURLOPT_URL, $url);
                     curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
                     curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-                    curl_setopt($curl_handle, CURLOPT_USERAGENT, $agent);
                     curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
                     $data = curl_exec($curl_handle);
                     curl_close($curl_handle);
+                    $data = json_decode($data);
 
-                    echo $data;
+                    echo $data->timeStamp;
                     die();
+
+
                     $a = str_contains($data, 'far fa-clock small mr-1');
                     if (!$a) {
                         echo 'oups';
