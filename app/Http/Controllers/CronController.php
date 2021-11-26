@@ -98,6 +98,7 @@ class CronController extends Controller
                     curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
                     $data = curl_exec($curl_handle);
                     curl_close($curl_handle);
+                    echo  $data;
                     $a = str_contains($data, 'timeStamp');
                     if (!$a) {
                         echo 'oups';
