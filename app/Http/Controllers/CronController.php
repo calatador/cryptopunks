@@ -106,9 +106,8 @@ class CronController extends Controller
                         break;
                     }
 
-                    var_dump($data->result);
-
                     var_dump($timeStemp);
+
                     die();
 
 
