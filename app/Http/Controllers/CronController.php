@@ -102,7 +102,7 @@ class CronController extends Controller
                     $data = json_decode($data);
                     $timeStemp = null;
 
-                    var_dump($data);
+                    var_dump($data->result);
 
                     var_dump($timeStemp);
                     die();
