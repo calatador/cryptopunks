@@ -151,7 +151,7 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
                 foreach ($data as $key => $result ){
                     if(( $key == "data") && ( $timeStemp == null) ){
                         foreach ($result as $mkey => $tansations){
-                            if (( $mkey == $h->track) && && ( $timeStemp == null)){
+                            if (( $mkey == $h->track)  && ( $timeStemp == null)){
                                 foreach ($tansations as $tansation){
                                     if ( ( $tansation->time != null) && ($tansation->time != '' ) && ( $timeStemp == null)){
                                         $timeStemp = $tansation->time;
