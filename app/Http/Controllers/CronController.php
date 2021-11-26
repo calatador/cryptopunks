@@ -149,23 +149,22 @@ $url = "https://api.blockchair.com/ethereum/dashboards/transaction/".$h->track."
 
                 $timeStemp = null;
                 foreach ($data as $key => $result ){
-                    if( $key == "data"){
+                    if(( $key == "data") && ( $timeStemp == null) ){
                         foreach ($result as $mkey => $tansations){
-                            if( $mkey == $h->track){
+                            if (( $mkey == $h->track) && && ( $timeStemp == null)){
                                 foreach ($tansations as $tansation){
-                                    var_dump($tansation->time);
-                                    die();
+                                    if ( ( $tansation->time != null) && ($tansation->time != '' ) && ( $timeStemp == null)){
+                                        $timeStemp = $tansation->time;
+                                        break;
+                                    }
                                 }
                             }
                         }
                     }
-                    var_dump($key);
-                    die();
-                    $timeStemp = $result->timeStamp;
-                    break;
+
                 }
                 if( $timeStemp != null){
-                    $date = date('Y-m-d H:i:s', $timeStemp);
+                    $date = date('Y-m-d H:i:s',strtotime( $timeStemp));
                     $h->txn = $date;
                     $h->sync = 1;
                     $h->update();
