@@ -72,6 +72,12 @@
                         </form>
 
 
+
+                        date = {{$selectedDate}} , selectedAssets :
+                        @foreach($asssets as $assset)
+                            {{$assset}} ,
+                        @endforeach
+
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                             <tr>
