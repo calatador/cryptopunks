@@ -39,7 +39,7 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        <form scr="/nft/public/list" method="get">
+                        <form scr="///list" method="get">
                         <div class="row" >
                             <div class="col-12">
                                 <div class="form-group">

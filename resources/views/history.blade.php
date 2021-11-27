@@ -26,7 +26,7 @@
 
 <body class="antialiased">
 <h1>
-    <a href="/nft/public">  < Home</a>
+    <a href="//">  < Home</a>
 </h1>
 
 <div class="" style="margin: 10%">
