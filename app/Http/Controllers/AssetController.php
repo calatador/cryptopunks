@@ -229,6 +229,16 @@ class AssetController extends Controller
 
 
 
+    }
+
+
+
+    public function history(){
+        $minLog = Minlog::get();
+
+
+
+        return view('cryptopunks' , ['assets' => '$assets' ]);
 
     }
 
