@@ -241,7 +241,7 @@ class AssetController extends Controller
 
 
 
-        return view('history' , [  'minlogs' => $minLog ]);
+        return view('history' , [  'minLogs' => $minLog ]);
 
     }
 
