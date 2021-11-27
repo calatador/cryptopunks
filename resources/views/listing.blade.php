@@ -72,10 +72,6 @@
                         </form>
 
 
-
-
-
-
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                             <tr>
@@ -83,8 +79,6 @@
                                 <th> image </th>
                                 <th> Accessories </th>
                                 <th> Price </th>
-
-
                             </tr>
                             </thead>
 

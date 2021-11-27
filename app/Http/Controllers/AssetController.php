@@ -43,9 +43,6 @@ class AssetController extends Controller
             $q->whereIn('asset_accessories.name', $selectedAssets);
         })->get();
 
-
-
-
          $options = AssetAccessories::all();
          foreach ($assets as $asset ){
              $as = $asset->dateCondition($date)->get();
@@ -73,7 +70,9 @@ class AssetController extends Controller
              }
          }
         $assets = $assets->sortBy('price');
-        return view('listing' , ['pageTitle' => $pageTitle , 'asssets' => $assets , 'options' => $options]);
+        return view('listing' , ['pageTitle' => $pageTitle , 'asssets' => $assets , 'options' => $options ,
+            'selectedDate' => $selectedDate
+            ]);
 
     }
 
