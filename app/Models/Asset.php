@@ -40,6 +40,7 @@ class Asset extends Model
           ->whereIn('type' , ['Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed' , '(Unwrap)' , '(Wrap)'])
         //    ->where('type' , '=' , 'Offered')
             ->orderBy('txn', 'DESC')
+            ->orderBy('id', 'DESC')
             ->limit(1);
     }
 
