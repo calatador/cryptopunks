@@ -43,8 +43,8 @@
                             <thead>
                             <tr>
                                  <th> Accessories </th>
-                                @foreach($minLogs['Beanie'] as $log)
-                                    <th>{{$log->date}}</th>
+                                @foreach($minLogs['Beanie'] as $key =>$log)
+                                    <th>{{$key}}</th>
                                 @endforeach
                                 <th> history </th>
                             </tr>
