@@ -133,9 +133,7 @@ class CronController extends Controller
             where('type','!=','Bid Withdrawn')->where('type','!=','Bid')->
         where('txn' , '>' ,'2020-12-01 00:00:00')->get();
 
-
         echo '--------------'. count($historys) . '------------';
-
         foreach ($historys as $h){
           //  $url =  "https://api.etherscan.io/api?module=account&action=txlistinternal&txhash=".$h->track."&apikey=5U3EZ84PQ1PQZV1SV6VWJ9W514XPXEYA58";
 

@@ -175,15 +175,14 @@ class AssetController extends Controller
         foreach ( $names as $name) {
             $name = $name->name;
             $dateinit = date('Y-m-d', time());
+            $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
+
             $date = $dateinit;
             for ($i = 0; $i < $nbrDays; $i++) {
                 $nbr = ($i == 0) ? 0 : 1;
-
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
-
                 $min = null;
-
                 $minlogtest = Minlog::where('accessorie' , '=', $name)
                     ->where('date' , '=' , $datekey )->first();
                 if( $minlogtest instanceof  Minlog){
