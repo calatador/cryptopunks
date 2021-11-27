@@ -85,7 +85,7 @@ class AssetController extends Controller
 
         $selectedAssets = $request->input('assets');
         if( $selectedAssets == null){
-            $selectedAssets = ['Smile'];
+            $selectedAssets = ['Beanie'];
         }else{
             var_dump($selectedAssets);
          }
