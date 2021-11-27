@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AssetHistory extends Model
 {
     protected $table = 'asset_history';
-
     use HasFactory;
-
-
-
-
 
 }
