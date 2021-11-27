@@ -335,13 +335,23 @@ class AssetController extends Controller
 "filler",
 "filler"];
         $dataArr = [];
-        foreach ( $names as $name) {
 
+
+        foreach ($names as $name){
+            $dataArr[$name] = [];
+        }
+        $minLog = Minlog::whereIn('accessorie', $names)->get();
+        foreach ($minLog as $log){
+            $dataArr[$log->accessorie][$log->date] = $log->value;
+        }
+
+        /*
+        foreach ( $names as $name) {
             $minLog = Minlog::where('accessorie', '=', $name)
                 ->orderBy('date', 'ASC')->get();
             $dataArr[$name] = $minLog;
         }
-
+        */
 
         return view('history' , [ 'names' => $names, 'minLogs' => $dataArr ]);
 

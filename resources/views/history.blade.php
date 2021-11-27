@@ -42,28 +42,20 @@
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                             <tr>
-                                 <th> # </th>
                                  <th> Accessories </th>
-
-
                                 @foreach($minLogs['Beanie'] as $log)
                                     <th>{{$log->date}}</th>
                                 @endforeach
-
                                 <th> history </th>
-
-
                             </tr>
                             </thead>
 
                             <tbody>
                             @foreach($names as $name)
-
                             <tr>
-                                <td> - </td>
                                 <td> {{$name}}</td>
                                 @foreach($minLogs[$name] as  $log)
-                                    <td>{{$log->value}}</td>
+                                    <td>{{$log}}</td>
                                 @endforeach
 
                             </tr>
