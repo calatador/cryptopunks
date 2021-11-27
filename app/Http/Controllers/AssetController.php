@@ -95,8 +95,8 @@ class AssetController extends Controller
             $q->whereIn('asset_accessories.name', $selectedAssets);
         })->get();
 
-        var_dump(count($assets));
-        die();
+     //   var_dump(count($assets));
+     //   die();
 
 
         $assetsArr = [];
