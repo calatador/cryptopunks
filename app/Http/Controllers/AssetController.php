@@ -71,7 +71,7 @@ class AssetController extends Controller
          }
         $assets = $assets->sortBy('price');
         return view('listing' , ['pageTitle' => $pageTitle , 'asssets' => $assets , 'options' => $options ,
-            'selectedDate' => $selectedDate
+            'selectedDate' => $selectedDate , 'selectedAssets' => $selectedAssets
             ]);
 
     }
