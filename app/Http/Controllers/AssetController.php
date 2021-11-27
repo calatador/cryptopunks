@@ -241,7 +241,7 @@ class AssetController extends Controller
 
 
 
-        return view('cryptopunks' , [  'minlogs' => $minLog ]);
+        return view('history' , [  'minlogs' => $minLog ]);
 
     }
 
