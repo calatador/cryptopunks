@@ -164,7 +164,6 @@ class AssetController extends Controller
         return view('cryptopunks' , ['assets' => $assets ]);
     }
 
-
     public function test(){
         $nbrDays = 365;
         $name = 'Beanie';
@@ -241,8 +240,6 @@ class AssetController extends Controller
 
 
     }
-
-
 
     public function history(){
 
