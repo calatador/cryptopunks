@@ -216,13 +216,13 @@ class AssetController extends Controller
                         //      echo $date . '-    '. $asset->id . ' : ' .$asset->last_price->eth . $asset->last_price->type . $asset->last_price->id;
                         //    echo '<br>';
                     }
-                    $log = Minlog::where('date' , '=' , $date)->where('accessorie' , '=' ,$name)->first();
+                    $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
                     if( $log instanceof  Minlog){
                         $log->value = $min;
                         $log->save();
                     }else{
                         $log = new Minlog();
-                        $log->date = $date;
+                        $log->date = $datekey;
                         $log->accessorie = $name;
                         $log->value = $min;
                         $log->save();
