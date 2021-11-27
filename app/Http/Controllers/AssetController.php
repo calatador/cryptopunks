@@ -177,11 +177,12 @@ class AssetController extends Controller
             $dateinit = date('Y-m-d', time());
             $date = $dateinit;
             for ($i = 0; $i < $nbrDays; $i++) {
+                $nbr = ($i == 0) ? 0 : 1;
+
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
 
                 $min = null;
-                $nbr = ($i == 0) ? 0 : 1;
 
                 $minlogtest = Minlog::where('accessorie' , '=', $name)
                     ->where('date' , '=' , $datekey )->first();
