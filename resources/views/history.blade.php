@@ -46,7 +46,6 @@
                                 @foreach($minLogs['Beanie'] as $key =>$log)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                <th> history </th>
                             </tr>
                             </thead>
 
