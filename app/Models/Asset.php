@@ -27,7 +27,7 @@ class Asset extends Model
     }
     public function dateCondition($date) {
         return $this->history()
-           ->where('txn','<', $date)
+           ->where('txn','<=', $date)
             //Bid Withdrawn
             //Bid
             //Sold
@@ -37,7 +37,7 @@ class Asset extends Model
             //Offer Withdrawn
             //(Unwrap)
             //(Wrap)
-          ->whereIn('type' , ['Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed'])
+          ->whereIn('type' , ['Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed' , '(Unwrap)' , '(Wrap)'])
         //    ->where('type' , '=' , 'Offered')
             ->orderBy('txn', 'DESC')
             ->limit(1);
