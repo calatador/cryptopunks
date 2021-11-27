@@ -70,6 +70,10 @@ class AssetController extends Controller
              }
          }
         $assets = $assets->sortBy('price');
+
+         var_dump($selectedAssets);
+         die();
+
         return view('listing' , ['pageTitle' => $pageTitle , 'asssets' => $assets , 'options' => $options ,
             'selectedDate' => $selectedDate , 'selectedAssets' => $selectedAssets
             ]);
