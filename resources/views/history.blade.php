@@ -46,7 +46,7 @@
                                  <th> Accessories </th>
 
 
-                                @foreach($minLogs as $log)
+                                @foreach($minLogs['Beanie'] as $log)
                                     <th>{{$log->date}}</th>
                                 @endforeach
 
@@ -57,15 +57,19 @@
                             </thead>
 
                             <tbody>
+                            @foreach($names as $name)
 
                             <tr>
                                 <td> - </td>
-                                <td> 3D Glasses</td>
-                                @foreach($minLogs as $log)
+                                <td> {{$name}}</td>
+                                @foreach($minLogs[$name] as  $log)
                                     <td>{{$log->value}}</td>
                                 @endforeach
 
                             </tr>
+                            @endforeach
+
+
 
                             </tbody>
                         </table>
