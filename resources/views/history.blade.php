@@ -69,7 +69,6 @@
 
                             </tbody>
                         </table>
-                        {{ $assets->links() }}
 
                     </div>
                 </div>
