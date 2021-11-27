@@ -71,12 +71,12 @@
                         </div>
                         </form>
 
-
-
+                        @if ($on)
                         date = {{$selectedDate}} , selectedAssets :
                         @foreach($selectedAssets as $selectedAsset)
                             {{$selectedAsset}} ,
                         @endforeach
+                        @endif
 
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>

@@ -27,7 +27,9 @@ class AssetController extends Controller
         $pageTitle = "cryptopunks";
         $selectedDate = $request->input('date');
         $selectedAssets = $request->input('assets');
+        $on = true;
         if( $selectedAssets == null){
+            $on = false;
             $selectedAssets = [];
         }
         if( $selectedDate != null) {
@@ -73,7 +75,7 @@ class AssetController extends Controller
 
 
         return view('listing' , ['pageTitle' => $pageTitle , 'asssets' => $assets , 'options' => $options ,
-            'selectedDate' => $selectedDate , 'selectedAssets' => $selectedAssets
+            'selectedDate' => $selectedDate , 'selectedAssets' => $selectedAssets , 'on' => $on
             ]);
 
     }
