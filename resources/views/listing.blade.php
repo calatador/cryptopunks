@@ -34,7 +34,7 @@
 
 
 <h1>
-    <a href="//">  < Home</a>
+    <a href="/">  < Home</a>
 </h1>
 
 
