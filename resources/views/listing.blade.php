@@ -74,8 +74,8 @@
 
 
                         date = {{$selectedDate}} , selectedAssets :
-                        @foreach($asssets as $assset)
-                            {{$assset}} ,
+                        @foreach($selectedAssets as $selectedAsset)
+                            {{$selectedAsset}} ,
                         @endforeach
 
                         <table class="table table-hover table-bordered" id="sampleTable">
