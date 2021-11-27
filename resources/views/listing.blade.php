@@ -91,7 +91,7 @@
                             <tbody>
                             @foreach($asssets as $assset)
                                 <tr>
-                                    <td>{{ $assset->name }}</td>
+                                    <td><a href="/cryptopunk?id={{$assset->num}}"> {{ $assset->name }} </a></td>
                                     <td>
                                         @if ($assset->num >= 1000)
                                         <img src="https://www.larvalabs.com/public/images/cryptopunks/punk{{$assset->num}}.png"><img>
