@@ -90,9 +90,13 @@ class AssetController extends Controller
             var_dump($selectedAssets);
          }
 
+
         $assets = Asset::whereHas('accessoires', function($q) use($selectedAssets) {
             $q->whereIn('asset_accessories.name', $selectedAssets);
         })->get();
+
+        var_dump(count($assets));
+        die();
 
 
         $assetsArr = [];
