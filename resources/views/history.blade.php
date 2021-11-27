@@ -47,7 +47,7 @@
 
 
                                 @foreach($minLogs as $log)
-                                    <th>{{$option->date}}</th>
+                                    <th>{{$log->date}}</th>
                                 @endforeach
 
                                 <th> history </th>
@@ -62,7 +62,7 @@
                                 <td> - </td>
                                 <td> 3D Glasses</td>
                                 @foreach($minLogs as $log)
-                                    <td>{{$option->value}}</td>
+                                    <td>{{$log->value}}</td>
                                 @endforeach
 
                             </tr>
