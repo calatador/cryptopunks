@@ -43,8 +43,13 @@
                             <thead>
                             <tr>
                                  <th> # </th>
-                                <th> name </th>
-                                <th> Accessories </th>
+                                 <th> Accessories </th>
+
+
+                                @foreach($minLogs as $log)
+                                    <th>{{$option->date}}</th>
+                                @endforeach
+
                                 <th> history </th>
 
 
@@ -52,6 +57,15 @@
                             </thead>
 
                             <tbody>
+
+                            <tr>
+                                <td> - </td>
+                                <td> 3D Glasses</td>
+                                @foreach($minLogs as $log)
+                                    <td>{{$option->value}}</td>
+                                @endforeach
+
+                            </tr>
 
                             </tbody>
                         </table>

@@ -234,11 +234,14 @@ class AssetController extends Controller
 
 
     public function history(){
-        $minLog = Minlog::get();
+
+        $name = '3D Glasses';
+        $minLog = Minlog::where('accessorie' ,'=' , $name)
+            ->orderBy('date', 'ASC')->get();
 
 
 
-        return view('cryptopunks' , ['assets' => '$assets' ]);
+        return view('cryptopunks' , [  'minlogs' => $minLog ]);
 
     }
 
