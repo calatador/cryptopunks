@@ -79,6 +79,8 @@
                             </thead>
 
                             <tbody>
+
+
                             @foreach($minArr as $min)
                                 <tr>
                                     <td> {{$min['date']}} </td>
@@ -98,6 +100,9 @@
 
 
                             @endforeach
+
+
+
                             </tbody>
                         </table>
                     </div>

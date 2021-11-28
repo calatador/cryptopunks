@@ -212,6 +212,7 @@ class AssetController extends Controller
                 echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
         }
+        $options = AssetAccessories::all();
 
         return view('month' , ['pageTitle' => $pageTitle , 'result' => $result , 'options' => $options]);
     }
