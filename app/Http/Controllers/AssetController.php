@@ -163,7 +163,6 @@ class AssetController extends Controller
 
         $names = $selectedAssets;
         foreach ( $names as $name) {
-            $name = $name->name;
             $dateinit = date('Y-m-d', time());
             $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
 
