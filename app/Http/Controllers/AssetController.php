@@ -186,6 +186,13 @@ class AssetController extends Controller
                         })
                         ->get();
 
+
+                    foreach ($assets as $asset){
+                        if( count($asset->last_price) > 0){
+                            echo 'test';
+                        }
+                    }
+                    die();
                     foreach ($assets as $key => $asset) {
                         if   ($asset->last_price == null)  {
                             $assets->forget($key);
