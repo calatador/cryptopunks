@@ -262,7 +262,7 @@ class AssetController extends Controller
     }
 
     public function test(){
-        $nbrDays = 365;
+        $nbrDays = 10;
         $name = 'Beanie';
         $names = array("Beanie", "Choker", "Pilot Helmet", "Tiara", "Orange Side", "Buck Teeth", "Welding Goggles", "Pigtails", "Pink With Hat", "Top Hat", "Spots", "Rosy Cheeks", "Blonde Short", "Wild White Hair", "Cowboy Hat", "Wild Blonde", "Straight Hair Blonde", "Big Beard", "Red Mohawk", "Half Shaved", "Blonde Bob", "Vampire Hair", "Clown Hair Green", "Straight Hair Dark", "Straight Hair", "Silver Chain", "Dark Hair", "Purple Hair", "Gold Chain", "Medical Mask", "Tassle Hat", "Fedora", "Police Cap", "Clown Nose", "Smile", "Cap Forward", "Hoodie", "Front Beard Dark", "Frown", "Purple Eye Shadow", "Handlebars", "Blue Eye Shadow", "Green Eye Shadow", "Vape", "Front Beard", "Chinstrap", "3D Glasses", "Luxurious Beard", "Mustache", "Normal Beard Black", "Normal Beard", "Eye Mask", "Goat", "Do-rag", "Shaved Head", "Muttonchops", "Peak Spike", "Pipe", "VR", "Cap", "Small Shades", "Clown Eyes Green", "Clown Eyes Blue", "Headband", "Crazy Hair", "Knitted Cap", "Mohawk Dark", "Mohawk", "Mohawk Thin", "Frumpy Hair", "Wild Hair", "Messy Hair", "Eye Patch", "Stringy Hair", "Bandana", "Classic Shades", "Shadow Beard", "Regular Shades", "Horned Rim Glasses", "Big Shades", "Nerd Glasses", "Black Lipstick", "Mole", "Purple Lipstick", "Hot Lipstick", "Cigarette", "Earring");
         $time_start = microtime(true);
@@ -277,33 +277,16 @@ class AssetController extends Controller
 
             $date = $dateinit;
 
-
-
-
-
             for ($i = 0; $i < $nbrDays; $i++) {
                 $nbr = ($i == 0) ? 0 : 1;
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
                 $min = null;
-                //   $result[$datekey] = [];
-                //find date to find assets
                 $minlogtest = Minlog::where('accessorie' , '=', $name)
                     ->where('date' , '=' , $datekey )->first();
-                if( $minlogtest instanceof  Minlog) {
-                }else{
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
-                    })
-                        /*
-                        ->whereHas('last_price', function ($c) use ($date) {
-                        $c->where('txn', '<=', $date);
-                    })
-                        ->with('last_price', function ($c) use ($date) {
-                            $c->where('txn', '<=', $date);
-                        })
-                        */
-                        ->get();
+                    })->get();
                     foreach ($assets as $asset) {
                         $as = $asset->dateCondition($date)->get();
                         $asset->price = -1;
@@ -318,8 +301,6 @@ class AssetController extends Controller
                             } elseif ($s->type == 'Sold') {
                                 break;
                             } else {
-                                //  var_dump($s->type);die();
-                                //  $asset->price = -1 ;
                                 break;
                             }
                         }
@@ -332,8 +313,6 @@ class AssetController extends Controller
                     $min = null;
                     $ass = null;
                     foreach ($assets as $asset) {
-                        //      echo '<pre>';
-                        //       echo var_dump($asset->last_price->eth);
                         if ($min == null) {
                             $min = $asset->price;
                             $ass = $asset;
@@ -345,7 +324,6 @@ class AssetController extends Controller
                         }
                     }
                     if ($min != null) {
-                 //       $result[$datekey] = ['min' => ($min == null) ? -1 : $min, 'ass' => $ass];
                         $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
                         if( $log instanceof  Minlog){
                             $log->value = $min;
@@ -357,18 +335,10 @@ class AssetController extends Controller
                             $log->value = $min;
                             $log->save();
                         }
-
                     }
 
-
-                }
             }
-
-
         }
-
-
-
     }
 
     public function history(){
