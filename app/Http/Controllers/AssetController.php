@@ -178,60 +178,66 @@ class AssetController extends Controller
 
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
-                    })->whereHas('last_price', function ($c) use ($date) {
+                    })
+                        /*
+                        ->whereHas('last_price', function ($c) use ($date) {
                         $c->where('txn', '<=', $date);
                     })
-                      /*  ->with('last_price', function ($c) use ($date) {
+                        ->with('last_price', function ($c) use ($date) {
                             $c->where('txn', '<=', $date);
                         })
-                      */
+                        */
                         ->get();
 
                     echo '<pre>';
-                    foreach ($assets as $asset){
-                        var_dump($asset->last_price);
-                        echo '-----------------<br>';
-                        /*
-                        if( count($asset->last_price) > 0){
-                            echo 'test';
+
+                    //
+
+                foreach ($assets as $asset ){
+                    $as = $asset->dateCondition($date)->get();
+                    $asset->price = -1 ;
+                    foreach ($as as $s ) {
+                        if ( ($s->type == 'Bid') or ($s->type == 'Bid *')){
+
+                        } elseif ( ($s->type == 'Bid Withdrawn') ) {
+
+                        } elseif ( $s->type == 'Offered') {
+                            $asset->price = $s->eth;
+                            break;
+                        } elseif ( $s->type == 'Sold') {
+                            break;
+                        } else{
+                            //  var_dump($s->type);die();
+                            //  $asset->price = -1 ;
+                            break;
                         }
-                        */
                     }
-                    die();
-                    foreach ($assets as $key => $asset) {
-                        if   ($asset->last_price == null)  {
-                            $assets->forget($key);
-                        } elseif ( $asset->last_price->type != 'Offered') {
-                            $assets->forget($key);
-                        }
+                }
+                foreach ($assets as $key => $asset){
+                    if( $asset->price == -1){
+                        $assets->forget($key);
                     }
+                }
+
+                    $min = null;
                     $ass = null;
-
-
-
                     foreach ($assets as $asset) {
-
                   //      echo '<pre>';
                  //       echo var_dump($asset->last_price->eth);
                         if( $min == null){
-                            $min = $asset->last_price->eth;
+                            $min = $asset->price;
                             $ass = $asset;
                         }else{
-                            if( $min > $asset->last_price->eth){
-                                $min = $asset->last_price->eth;
+                            if( $min > $asset->price){
+                                $min = $asset->price;
                                 $ass = $asset;
                             }
-                           // $min = ($min > $asset->last_price->eth) ? $asset->last_price->eth : $min;
-
                         }
                     }
-
-
 
                     if( $min != null) {
                         $result[$datekey] = ['min' => ( $min == null) ? -1 : $min , 'ass' => $ass ];
                     }
-          //      echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
         }
         $options = AssetAccessories::all();
