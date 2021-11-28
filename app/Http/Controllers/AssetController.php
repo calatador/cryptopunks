@@ -198,6 +198,9 @@ class AssetController extends Controller
 
 
                     foreach ($assets as $asset) {
+
+                        echo '<pre>';
+                        echo var_dump($asset->last_price->eth);
                         if( $min == null){
                             $min = $asset->last_price->eth;
                             $ass = $asset;
