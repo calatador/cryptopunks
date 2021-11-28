@@ -47,8 +47,9 @@ class Asset extends Model
     public function last_price()
     {
         return $this->hasOne(AssetHistory::class , 'asset_id' , 'num')
-            ->whereIn('type' , ['Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed'])
-             ->latest( );
+            ->whereIn('type' , ['Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed'
+            ])
+             ->latest( 'txn');
       //  ->orderBy('txn')->orderBy('id')->limit(1);
     }
 
