@@ -85,7 +85,7 @@
                                 <tr>
                                     <td>{{$key}}</td>
                                     <td>{{$min['ass']->name}}</td>
-                                    <td><img src="{{$min['ass']->image}}"><img></td>
+                                    <td><img width="30px" src="{{$min['ass']->image}}"><img></td>
                                     <td> {{$min['min']}} </td>
                                 </tr>
 
