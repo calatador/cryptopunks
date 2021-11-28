@@ -40,8 +40,9 @@ class Asset extends Model
           ->whereIn('type' , [
               'Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed' , '(Unwrap)' , '(Wrap)'])
         //    ->where('type' , '=' , 'Offered')
-          //  ->orderBy('txn', 'DESC')
-            ->orderBy('id', 'DESC');
+            ->orderBy('txn', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->limit(1);
     }
 
     public function last_price()
