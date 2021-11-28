@@ -172,7 +172,7 @@ class AssetController extends Controller
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
                 $min = null;
-                $result[$datekey] = [];
+             //   $result[$datekey] = [];
                     //find date to find assets
 
 
@@ -208,7 +208,10 @@ class AssetController extends Controller
 
                         }
                     }
-                $result[$datekey] = ['min' => ( $min == null) ? -1 : $min , 'ass' => $ass ];
+                    if( $min != null) {
+                        $result[$datekey] = ['min' => ( $min == null) ? -1 : $min , 'ass' => $ass ];
+
+                    }
           //      echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
         }
