@@ -186,9 +186,7 @@ class AssetController extends Controller
                         })
                         ->get();
 
-                    echo '<pre>';
-                    var_dump($assets);
-                    die();
+
 
 
                     foreach ($assets as $key => $asset) {
@@ -199,6 +197,11 @@ class AssetController extends Controller
                         }
                     }
                     $ass = null;
+
+                echo '<pre>';
+                var_dump($assets);
+                die();
+
                     foreach ($assets as $asset) {
                         if( $min == null){
                             $min = $asset->last_price->eth;
