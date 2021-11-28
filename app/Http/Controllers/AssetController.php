@@ -207,9 +207,7 @@ class AssetController extends Controller
                     }
                 $result[$datekey] = ['min' => $min , 'ass' => $ass ];
 
-
-
-                echo $min . '-' . 'ass => ' . $asset->id . '<br>';
+          //      echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
         }
         $options = AssetAccessories::all();

@@ -84,7 +84,7 @@
                             @foreach($result as $key => $min)
                                 <tr>
                                     <td>{{$key}}</td>
-                                    <td>{{$min['ass']->name}}</td>
+                                    <td><a href="/cryptopunk?id={{$min['ass']->num}}">{{$min['ass']->name}}</a></td>
                                     <td><img width="30px" src="{{$min['ass']->image}}"><img></td>
                                     <td> {{$min['min']}} </td>
                                 </tr>
