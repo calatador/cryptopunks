@@ -181,9 +181,10 @@ class AssetController extends Controller
                     })->whereHas('last_price', function ($c) use ($date) {
                         $c->where('txn', '<=', $date);
                     })
-                        ->with('last_price', function ($c) use ($date) {
+                      /*  ->with('last_price', function ($c) use ($date) {
                             $c->where('txn', '<=', $date);
                         })
+                      */
                         ->get();
 
                     echo '<pre>';
