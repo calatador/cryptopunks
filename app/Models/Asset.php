@@ -48,8 +48,8 @@ class Asset extends Model
     {
         return $this->hasOne(AssetHistory::class , 'asset_id' , 'num')
             ->whereIn('type' , ['Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed'
-            ]);
-           //  ->latest( 'txn');
+            ])
+            ->latest( 'txn');
       //  ->orderBy('txn')->orderBy('id')->limit(1);
     }
 
