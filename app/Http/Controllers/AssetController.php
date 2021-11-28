@@ -287,6 +287,9 @@ class AssetController extends Controller
 
                 }else{
                     //find date to find assets
+
+
+                    /* old script
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
                     })->whereHas('last_price', function ($c) use ($date) {
@@ -313,6 +316,11 @@ class AssetController extends Controller
                         //      echo $date . '-    '. $asset->id . ' : ' .$asset->last_price->eth . $asset->last_price->type . $asset->last_price->id;
                         //    echo '<br>';
                     }
+                    end old script
+                    */
+
+
+
                     $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
                     if( $log instanceof  Minlog){
                         $log->value = $min;
@@ -330,6 +338,95 @@ class AssetController extends Controller
 
 
             }
+
+
+
+
+
+            for ($i = 0; $i < $nbrDays; $i++) {
+                $nbr = ($i == 0) ? 0 : 1;
+                $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
+                $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
+                $min = null;
+                //   $result[$datekey] = [];
+                //find date to find assets
+                $minlogtest = Minlog::where('accessorie' , '=', $name)
+                    ->where('date' , '=' , $datekey )->first();
+                if( $minlogtest instanceof  Minlog) {
+                }else{
+                    $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
+                        $q->where('asset_accessories.name', '=', $name);
+                    })
+                        /*
+                        ->whereHas('last_price', function ($c) use ($date) {
+                        $c->where('txn', '<=', $date);
+                    })
+                        ->with('last_price', function ($c) use ($date) {
+                            $c->where('txn', '<=', $date);
+                        })
+                        */
+                        ->get();
+                    foreach ($assets as $asset) {
+                        $as = $asset->dateCondition($date)->get();
+                        $asset->price = -1;
+                        foreach ($as as $s) {
+                            if (($s->type == 'Bid') or ($s->type == 'Bid *')) {
+
+                            } elseif (($s->type == 'Bid Withdrawn')) {
+
+                            } elseif ($s->type == 'Offered') {
+                                $asset->price = $s->eth;
+                                break;
+                            } elseif ($s->type == 'Sold') {
+                                break;
+                            } else {
+                                //  var_dump($s->type);die();
+                                //  $asset->price = -1 ;
+                                break;
+                            }
+                        }
+                    }
+                    foreach ($assets as $key => $asset) {
+                        if ($asset->price == -1) {
+                            $assets->forget($key);
+                        }
+                    }
+                    $min = null;
+                    $ass = null;
+                    foreach ($assets as $asset) {
+                        //      echo '<pre>';
+                        //       echo var_dump($asset->last_price->eth);
+                        if ($min == null) {
+                            $min = $asset->price;
+                            $ass = $asset;
+                        } else {
+                            if ($min > $asset->price) {
+                                $min = $asset->price;
+                                $ass = $asset;
+                            }
+                        }
+                    }
+                    if ($min != null) {
+                        $result[$datekey] = ['min' => ($min == null) ? -1 : $min, 'ass' => $ass];
+                        $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
+                        if( $log instanceof  Minlog){
+                            $log->value = $min;
+                            $log->save();
+                        }else{
+                            $log = new Minlog();
+                            $log->date = $datekey;
+                            $log->accessorie = $name;
+                            $log->value = $min;
+                            $log->save();
+                        }
+
+                    }
+
+
+                }
+            }
+
+
         }
 
 
