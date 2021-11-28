@@ -186,9 +186,6 @@ class AssetController extends Controller
                         })
                         ->get();
 
-
-
-
                     foreach ($assets as $key => $asset) {
                         if   ($asset->last_price == null)  {
                             $assets->forget($key);
@@ -198,9 +195,7 @@ class AssetController extends Controller
                     }
                     $ass = null;
 
-                echo '<pre>';
-                var_dump($assets);
-                die();
+
 
                     foreach ($assets as $asset) {
                         if( $min == null){
@@ -215,6 +210,12 @@ class AssetController extends Controller
 
                         }
                     }
+
+                echo '<pre>';
+                var_dump($assets);
+                die();
+
+
                     if( $min != null) {
                         $result[$datekey] = ['min' => ( $min == null) ? -1 : $min , 'ass' => $ass ];
                     }
