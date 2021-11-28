@@ -81,7 +81,7 @@
                             <tbody>
 
 
-                            @foreach($minArr as $min)
+                            @foreach($result as $min)
                                 <tr>
                                     <td> {{$min['date']}} </td>
                                     <td> {{$min['punk']->name}}
