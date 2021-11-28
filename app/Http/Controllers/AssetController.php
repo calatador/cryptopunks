@@ -161,18 +161,18 @@ class AssetController extends Controller
             var_dump($selectedAssets);
         }
 
+        $result = [];
         $names = $selectedAssets;
         foreach ( $names as $name) {
             $dateinit = date('Y-m-d', time());
             $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
-
             $date = $dateinit;
             for ($i = 0; $i < $nbrDays; $i++) {
                 $nbr = ($i == 0) ? 0 : 1;
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
                 $min = null;
-
+                $result[$datekey] = [];
                     //find date to find assets
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
@@ -190,17 +190,26 @@ class AssetController extends Controller
                             $assets->forget($key);
                         }
                     }
+                    $ass = null;
                     foreach ($assets as $asset) {
                         if( $min == null){
                             $min = $asset->last_price->eth;
+                            $ass = $asset;
                         }else{
-                            $min = ($min > $asset->last_price->eth) ? $asset->last_price->eth : $min;
+                            if( $min > $asset->last_price->eth){
+                                $min = $asset->last_price->eth;
+                                $ass = $asset;
+                            }
+                           // $min = ($min > $asset->last_price->eth) ? $asset->last_price->eth : $min;
+
                         }
 
                     }
+                $result[$datekey] = ['min' => $min , 'ass' => $asset ];
 
 
-                    echo $min . '-';
+
+                echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
         }
 
