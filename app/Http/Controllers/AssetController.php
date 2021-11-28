@@ -345,7 +345,7 @@ class AssetController extends Controller
                         }
                     }
                     if ($min != null) {
-                        $result[$datekey] = ['min' => ($min == null) ? -1 : $min, 'ass' => $ass];
+                 //       $result[$datekey] = ['min' => ($min == null) ? -1 : $min, 'ass' => $ass];
                         $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
                         if( $log instanceof  Minlog){
                             $log->value = $min;
