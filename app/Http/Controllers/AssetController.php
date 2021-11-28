@@ -186,6 +186,10 @@ class AssetController extends Controller
                         })
                         ->get();
 
+                    echo '<pre>';
+                    var_dump($assets);
+                    die();
+
 
                     foreach ($assets as $key => $asset) {
                         if   ($asset->last_price == null)  {
