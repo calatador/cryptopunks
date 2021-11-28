@@ -189,7 +189,6 @@ class AssetController extends Controller
                         */
                         ->get();
 
-                    echo '<pre>';
 
                     //
 
