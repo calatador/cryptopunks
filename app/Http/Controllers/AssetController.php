@@ -212,7 +212,7 @@ class AssetController extends Controller
                     }
 
                 echo '<pre>';
-                var_dump($assets);
+                var_dump($result);
                 die();
 
 
