@@ -205,7 +205,7 @@ class AssetController extends Controller
                         }
 
                     }
-                $result[$datekey] = ['min' => $min , 'ass' => $asset ];
+                $result[$datekey] = ['min' => $min , 'ass' => $ass ];
 
 
 

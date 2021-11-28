@@ -81,21 +81,12 @@
                             <tbody>
 
 
-                            @foreach($result as $min)
+                            @foreach($result as $key => $min)
                                 <tr>
-                                    <td> {{$min['date']}} </td>
-                                    <td> {{$min['punk']->name}}
-                                        @if ($min['punk']->num >= 1000)
-                                            <img src="https://www.larvalabs.com/public/images/cryptopunks/punk{{$min['punk']->num}}.png"><img>
-                                        @elseif  ($min['punk']->num >= 100)
-                                            <img src="https://www.larvalabs.com/public/images/cryptopunks/punk0{{$min['punk']->num}}.png"><img>
-                                        @elseif  ($min['punk']->num >= 10)
-                                            <img src="https://www.larvalabs.com/public/images/cryptopunks/punk00{{$min['punk']->num}}.png"><img>
-                                        @else
-                                            <img src="https://www.larvalabs.com/public/images/cryptopunks/punk000{{$min['punk']->num}}.png"><img>
-                                        @endif
-                                    </td>
-                                    <td> {{$min['price']}} </td>
+                                    <td>{{$key}}</td>
+                                    <td>{{$min['ass']->name}}</td>
+                                    <td><img src="{{$min['ass']->image}}"><img></td>
+                                    <td> {{$min['min']}} </td>
                                 </tr>
 
 
