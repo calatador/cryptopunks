@@ -213,7 +213,6 @@ class AssetController extends Controller
             }
         }
 
-        die();
         return view('month' , ['pageTitle' => $pageTitle , 'result' => $result , 'options' => $options]);
     }
 
