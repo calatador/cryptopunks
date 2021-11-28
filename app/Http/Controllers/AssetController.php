@@ -150,7 +150,7 @@ class AssetController extends Controller
 
 
     public function month(Request $request){
-        $pageTitle = "cryptopunks";
+        $pageTitle = "Orange Side";
         $dateinit = date('Y-m-d', time() );
         $selectedAssets = $request->input('assets');
         $nbrDays = 31;
