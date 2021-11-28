@@ -186,7 +186,7 @@ class AssetController extends Controller
                         })
                         ->get();
 
-
+                    echo '<pre>';
                     foreach ($assets as $asset){
                         var_dump($asset->last_price);
                         echo '-----------------<br>';
