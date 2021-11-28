@@ -188,9 +188,13 @@ class AssetController extends Controller
 
 
                     foreach ($assets as $asset){
+                        var_dump($asset->last_price);
+                        echo '-----------------<br>';
+                        /*
                         if( count($asset->last_price) > 0){
                             echo 'test';
                         }
+                        */
                     }
                     die();
                     foreach ($assets as $key => $asset) {
