@@ -174,6 +174,8 @@ class AssetController extends Controller
                 $min = null;
                 $result[$datekey] = [];
                     //find date to find assets
+
+
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
                     })->whereHas('last_price', function ($c) use ($date) {
@@ -183,6 +185,8 @@ class AssetController extends Controller
                             $c->where('txn', '<=', $date);
                         })
                         ->get();
+
+
                     foreach ($assets as $key => $asset) {
                         if   ($asset->last_price == null)  {
                             $assets->forget($key);
@@ -203,10 +207,8 @@ class AssetController extends Controller
                            // $min = ($min > $asset->last_price->eth) ? $asset->last_price->eth : $min;
 
                         }
-
                     }
                 $result[$datekey] = ['min' => $min , 'ass' => $ass ];
-
           //      echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
         }
