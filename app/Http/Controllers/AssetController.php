@@ -210,7 +210,6 @@ class AssetController extends Controller
                     }
                     if( $min != null) {
                         $result[$datekey] = ['min' => ( $min == null) ? -1 : $min , 'ass' => $ass ];
-
                     }
           //      echo $min . '-' . 'ass => ' . $asset->id . '<br>';
             }
