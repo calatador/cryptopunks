@@ -41,8 +41,8 @@ class Asset extends Model
               'Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed' , '(Unwrap)' , '(Wrap)'])
        //     ->orderBy('txn', 'DESC')
           //  ->orderBy('id', 'DESC')
-           ->orderBy('id')
-            ->limit(10);
+           ->orderBy('id' ,'DESC');
+       //     ->limit(10);
     }
 
     public function last_price()
