@@ -102,6 +102,7 @@ class CronHistory extends Command
                     $min = null;
                     $ass = null;
                     foreach ($assets as $asset) {
+                        echo $asset->id . $asset->price . "\n";
                         if ($min == null) {
                             $min = $asset->price;
                             $ass = $asset;
