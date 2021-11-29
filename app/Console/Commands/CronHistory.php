@@ -79,6 +79,15 @@ class CronHistory extends Command
                     foreach ($assets as $asset) {
                         $as = $asset->dateCondition($date)->get();
                         $asset->price = -1;
+                        echo "\n";echo "\n";echo "\n";echo "\n";
+
+                        if( $asset->id == 8865){
+                            foreach ($as as $s) {
+                                echo $s->type . '->' . $s->eth . "\n";
+                            }
+                        }
+
+
                         foreach ($as as $s) {
                             if (($s->type == 'Bid') or ($s->type == 'Bid *')) {
 
