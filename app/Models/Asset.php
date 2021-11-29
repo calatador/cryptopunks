@@ -76,6 +76,10 @@ class Asset extends Model
     static function assetSecInit($data , $id){
         $asset = Asset::where('num' , '=' , $id)->first();
         $history = $asset->getLiveHistory();
+
+
+        var_dump($history);
+        die();
             foreach ($history as $item){
 
                 $his = AssetHistory::where('track' , '=' , $item[6] )->where('asset_id' , '=' , $id)->first();
