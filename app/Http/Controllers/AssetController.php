@@ -197,6 +197,12 @@ class AssetController extends Controller
                         }
                     }
                 }
+
+                foreach ( $assets as $asset){
+                    echo $asset->num  . ' -> ' .  $asset->price . '<br>';
+                }
+
+
                 foreach ($assets as $key => $asset){
                     if( $asset->price == -1){
                         $assets->forget($key);
