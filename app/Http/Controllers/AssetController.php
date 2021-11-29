@@ -182,6 +182,8 @@ class AssetController extends Controller
                 foreach ($assets as $asset ){
                     $as = $asset->dateCondition($date)->get();
                     $asset->price = -1 ;
+
+                    echo $asset->num  . ' -> ' .  $asset->price .  count($as).'<br>';
                     foreach ($as as $s ) {
                        if ( $s->type == 'Offered') {
                             $asset->price = $s->eth;
@@ -192,11 +194,11 @@ class AssetController extends Controller
                             break;
                         }
                     }
+
+
                 }
 
-                foreach ( $assets as $asset){
-                    echo $asset->num  . ' -> ' .  $asset->price . '<br>';
-                }
+
 
 
                 foreach ($assets as $key => $asset){
