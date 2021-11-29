@@ -57,7 +57,7 @@ class CronHistory extends Command
             set_time_limit(0);
 
             $names = AssetAccessories::get();
-            $names = AssetAccessories::->where('name' , '=' , 'Beanie')->get();
+            $names = AssetAccessories::where('name' , '=' , 'Beanie')->get();
 
             foreach ( $names as $name) {
                 $name = $name->name;
