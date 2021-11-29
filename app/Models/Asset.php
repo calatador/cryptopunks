@@ -130,6 +130,7 @@ class Asset extends Model
 
             $a = str_contains($data, 'Too Many Requests');
             if ($a) {
+                echo $data;
                 echo 'oups';
                 sleep(5);
             }
