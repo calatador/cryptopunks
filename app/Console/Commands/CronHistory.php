@@ -46,7 +46,7 @@ class CronHistory extends Command
         $c = new CronController();
         $hello = 0 ;
         while (true){
-        $c->syncHistory();
+     //   $c->syncHistory();
 
         if( $hello == 0){
             $nbrDays = 365;
@@ -58,6 +58,9 @@ class CronHistory extends Command
             set_time_limit(0);
 
             $names = AssetAccessories::get();
+            $t = ['Hot Lipstick' , 'Mole' , 'Wild Hair' , 'Female'];
+            $names = AssetAccessories::whereIn('name' , $t)->get();
+
             foreach ( $names as $name) {
                 $name = $name->name;
                 $dateinit = date('Y-m-d', time());
