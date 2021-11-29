@@ -77,10 +77,7 @@ class CronHistory extends Command
                     foreach ($assets as $asset) {
                         $as = $asset->dateCondition($date)->get();
                         $asset->price = -1;
-                        foreach ( $as as $a){
-                            echo $a->id . '-' . $a->type . '\n';
-                        }
-                        die();
+
 
                         foreach ($as as $s) {
                             if ($s->type == 'Offered') {

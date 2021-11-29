@@ -73,12 +73,8 @@ class Asset extends Model
 
     static function assetSecInit($data , $id){
         $asset = Asset::where('num' , '=' , $id)->first();
-        $history = $asset->getLiveHistory();
-
-
-
-            foreach ($history as $item){
-
+        $historys = $asset->getLiveHistory();
+            foreach (array_reverse($historys) as $item){
                 $his = AssetHistory::where('track' , '=' , $item[6] )->where('asset_id' , '=' , $id)->first();
                 if( !$his instanceof AssetHistory){
                     echo '-';
