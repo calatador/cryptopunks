@@ -94,6 +94,10 @@
                                     <div class="ml-4 text-lg leading-7 font-semibold">
                                         <a href="./cryptopunks" class="underline text-gray-900 dark:text-white"> cryptopunks  list</a>
                                     </div>
+
+                                    <div class="ml-4 text-lg leading-7 font-semibold">
+                                        <a href="./history" class="underline text-gray-900 dark:text-white"> Attributes</a>
+                                    </div>
                                 </div>
 
 
