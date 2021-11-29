@@ -71,11 +71,11 @@ class CronController extends Controller
                 foreach ( $json_data as $key => $json) {
                     $id = intval($key);
 
-                    if( $id == 8865){
+
                     Asset::assetSecInit($json, $id);
                    $optionSatus->values = $id;
                     $optionSatus->save();
-                    }
+
 
                 }
                 echo 'done';
