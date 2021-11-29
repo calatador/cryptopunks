@@ -23,7 +23,8 @@ class Asset extends Model
     }
     public function history()
     {
-        return $this->hasMany(AssetHistory::class, 'asset_id', 'num');
+        return $this->hasMany(AssetHistory::class, 'asset_id', 'num')
+            ->orderBy('id' , 'DESC');
     }
     public function dateCondition($date) {
         return $this->history()

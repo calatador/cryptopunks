@@ -148,7 +148,6 @@ class AssetController extends Controller
         return view('month' , ['pageTitle' => $pageTitle , 'minArr' => $minArr , 'options' => $options]);
     }
 
-
     public function month(Request $request){
         $pageTitle = "Orange Side";
         $dateinit = date('Y-m-d', time() );
@@ -236,7 +235,6 @@ class AssetController extends Controller
 
         return view('month' , ['pageTitle' => $pageTitle , 'result' => $result , 'options' => $options]);
     }
-
 
     public function cryptopunks(){
         $assets = Asset::limit(250)->simplePaginate(15);
