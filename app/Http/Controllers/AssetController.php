@@ -181,7 +181,7 @@ class AssetController extends Controller
                     foreach ( $assets as $asset){
                         echo $asset->num  . '<br>';
                     }
-                    die();
+                   // die();
 
                 foreach ($assets as $asset ){
                     $as = $asset->dateCondition($date)->get();
