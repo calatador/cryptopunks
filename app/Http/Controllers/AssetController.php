@@ -185,7 +185,7 @@ class AssetController extends Controller
 
                     echo $asset->num  . ' -> ' .  $asset->price ." -> " . count($as).'<br>';
                     foreach ($as as $s ) {
-                        echo $s->type . '<br>';
+                        echo $s->id . '-' .$s->type . ' - ' . $s->eth . '<br>';
                     }
                     foreach ($as as $s ) {
                        if ( $s->type == 'Offered') {
