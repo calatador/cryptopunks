@@ -165,9 +165,9 @@ class AssetController extends Controller
         $names = $selectedAssets;
         foreach ( $names as $name) {
             $dateinit = date('Y-m-d', time());
-            $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
+            $dateinit = date('Y-m-d', strtotime($dateinit . ' -' . 3 . ' day'));
             $date = $dateinit;
-            for ($i = 3; $i < $nbrDays; $i++) {
+            for ($i = 0; $i < $nbrDays; $i++) {
                 $nbr = ($i == 0) ? 0 : 1;
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
