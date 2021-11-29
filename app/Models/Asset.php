@@ -78,8 +78,7 @@ class Asset extends Model
         $history = $asset->getLiveHistory();
 
 
-        var_dump($history);
-        die();
+
             foreach ($history as $item){
 
                 $his = AssetHistory::where('track' , '=' , $item[6] )->where('asset_id' , '=' , $id)->first();
