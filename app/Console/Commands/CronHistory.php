@@ -41,7 +41,12 @@ class CronHistory extends Command
 
 
         $c = new CronController();
+        while (true){
         $c->syncHistory();
+
+
+        sleep(300);
+        }
         return Command::SUCCESS;
     }
 }

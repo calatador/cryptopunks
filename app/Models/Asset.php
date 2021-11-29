@@ -132,7 +132,7 @@ class Asset extends Model
             if ($a) {
                 echo $data;
                 echo 'oups';
-                sleep(5);
+                sleep(160);
             }
 
         } while ($a);
