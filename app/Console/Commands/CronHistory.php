@@ -115,6 +115,8 @@ class CronHistory extends Command
                         echo $datekey . ' -> ' .$min;
                         $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
                         if( $log instanceof  Minlog){
+
+                            echo $log->id . ' updated';
                             $log->value = $min;
                             $log->save();
                         }else{
