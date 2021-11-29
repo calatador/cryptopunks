@@ -80,6 +80,7 @@ class Asset extends Model
 
                 $his = AssetHistory::where('track' , '=' , $item[6] )->where('asset_id' , '=' , $id)->first();
                 if( !$his instanceof AssetHistory){
+                    echo '-';
                     if( isset($item[3]['eth'])){
                         $history = new AssetHistory();
                         $history->asset_id = $asset->num ;
