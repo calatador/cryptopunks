@@ -113,7 +113,7 @@ class CronHistory extends Command
                         }
                     }
                     if ($min != null) {
-                        echo $min;
+                        echo $datekey . ' -> ' .$min;
                         $log = Minlog::where('date' , '=' , $datekey)->where('accessorie' , '=' ,$name)->first();
                         if( $log instanceof  Minlog){
                             $log->value = $min;
