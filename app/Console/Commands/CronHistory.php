@@ -64,16 +64,16 @@ class CronHistory extends Command
                 $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
                 $date = $dateinit;
 
-                $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
-                    $q->where('asset_accessories.name', '=', $name);
-                })->get();
+
 
                 for ($i = 0; $i < $nbrDays; $i++) {
                     $nbr = ($i == 0) ? 0 : 1;
                     $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                     $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
                     $min = null;
-
+                    $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
+                        $q->where('asset_accessories.name', '=', $name);
+                    })->get();
                     foreach ($assets as $asset) {
                         $as = $asset->dateCondition($date)->get();
                         $asset->price = -1;
