@@ -172,42 +172,21 @@ class AssetController extends Controller
                 $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                 $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
                 $min = null;
-             //   $result[$datekey] = [];
-                    //find date to find assets
-
-
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
                     })
-                        /*
-                        ->whereHas('last_price', function ($c) use ($date) {
-                        $c->where('txn', '<=', $date);
-                    })
-                        ->with('last_price', function ($c) use ($date) {
-                            $c->where('txn', '<=', $date);
-                        })
-                        */
                         ->get();
-
-
-                    //
 
                 foreach ($assets as $asset ){
                     $as = $asset->dateCondition($date)->get();
                     $asset->price = -1 ;
                     foreach ($as as $s ) {
-                        if ( ($s->type == 'Bid') or ($s->type == 'Bid *')){
-
-                        } elseif ( ($s->type == 'Bid Withdrawn') ) {
-
-                        } elseif ( $s->type == 'Offered') {
+                       if ( $s->type == 'Offered') {
                             $asset->price = $s->eth;
                             break;
                         } elseif ( $s->type == 'Sold') {
                             break;
                         } else{
-                            //  var_dump($s->type);die();
-                            //  $asset->price = -1 ;
                             break;
                         }
                     }

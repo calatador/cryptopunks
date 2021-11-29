@@ -30,19 +30,16 @@ class Asset extends Model
            ->where('txn','<=', $date)
             //Bid Withdrawn
             //Bid
-            //Sold
-            //Offered
-            //Transfer
-            //Claimed
-            //Offer Withdrawn
-            //(Unwrap)
-            //(Wrap)
           ->whereIn('type' , [
-              'Sold' , 'Offered' , 'Transfer' , 'Offer Withdrawn' , 'Claimed' , '(Unwrap)' , '(Wrap)'])
-       //     ->orderBy('txn', 'DESC')
-          //  ->orderBy('id', 'DESC')
+                "Sold",
+                "Offered",
+                "Transfer",
+                "Claimed",
+                "Offer Withdrawn",
+                "(Unwrap)",
+                "(Wrap)"
+            ])
            ->orderBy('id' ,'DESC');
-       //     ->limit(10);
     }
 
     public function last_price()
