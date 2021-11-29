@@ -82,7 +82,7 @@ class CronHistory extends Command
                         echo "\n";
 
 
-                        if( $asset->id == 8865){
+                        if( $asset->num == 8865){
                             foreach ($as as $s) {
                                 echo $s->type . '->' . $s->eth . "\n";
                             }
