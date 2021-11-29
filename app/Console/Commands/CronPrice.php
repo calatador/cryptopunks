@@ -43,6 +43,7 @@ class CronPrice extends Command
     {
         $a = new CronController();
         $a->syncPrice();
+        echo '-';
 
 
         $nbrDays = 10;
