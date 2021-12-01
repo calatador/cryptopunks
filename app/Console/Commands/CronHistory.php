@@ -84,13 +84,13 @@ class CronHistory extends Command
                                 $asset->price = $s->eth;
                                 $forSell++;
                                 $somme = $somme + $asset->price;
-                                echo $asset->price . '-';
-                                break;
+                                 break;
                             } else {
                                 break;
                             }
                         }
                     }
+                    echo $somme / $forSell ;
                     foreach ($assets as $key => $asset) {
                         if ($asset->price == -1) {
                             $assets->forget($key);
