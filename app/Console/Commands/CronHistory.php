@@ -90,7 +90,7 @@ class CronHistory extends Command
                             }
                         }
                     }
-                    echo $somme / $forSell ;
+                    echo $somme . '/' . $forSell ;
 die();
                     foreach ($assets as $key => $asset) {
                         if ($asset->price == -1) {
