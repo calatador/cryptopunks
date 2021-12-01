@@ -41,8 +41,6 @@ class CronHistory extends Command
      */
     public function handle()
     {
-
-
         $c = new CronController();
         $hello = 0 ;
         while (true){
@@ -58,7 +56,7 @@ class CronHistory extends Command
             set_time_limit(0);
 
             $names = AssetAccessories::get();
-            $t = ['Hot Lipstick' , 'Mole' , 'Wild Hair' , 'Female'];
+            $t = [ 'Female'];
             $names = AssetAccessories::whereIn('name' , $t)->get();
 
             foreach ( $names as $name) {
@@ -66,10 +64,10 @@ class CronHistory extends Command
                 $dateinit = date('Y-m-d', time());
                 $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
                 $date = $dateinit;
-
-
-
                 for ($i = 0; $i < $nbrDays; $i++) {
+                    $forSell = 0;
+                    $somme = 0;
+
                     $nbr = ($i == 0) ? 0 : 1;
                     $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                     $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
@@ -77,14 +75,15 @@ class CronHistory extends Command
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
                     })->get();
+
                     foreach ($assets as $asset) {
                         $as = $asset->dateCondition($date)->get();
                         $asset->price = -1;
-
-
                         foreach ($as as $s) {
                             if ($s->type == 'Offered') {
                                 $asset->price = $s->eth;
+                                $forSell++;
+                                $somme = $somme + $asset->price;
                                 break;
                             } else {
                                 break;
@@ -97,7 +96,6 @@ class CronHistory extends Command
                         }
                     }
                     $min = null;
-                    $ass = null;
                     foreach ($assets as $asset) {
                         if ($min == null) {
                             $min = $asset->price;
@@ -118,12 +116,17 @@ class CronHistory extends Command
 
                             echo $log->id . ' updated';
                             $log->value = $min;
+                            $log->forsell = $forSell;
+                            $log->avg = $somme / $forSell;
+
                             $log->save();
                         }else{
                             $log = new Minlog();
                             $log->date = $datekey;
                             $log->accessorie = $name;
                             $log->value = $min;
+                            $log->forsell = $forSell;
+                            $log->avg = $somme / $forSell;
                             $log->save();
                         }
                 }

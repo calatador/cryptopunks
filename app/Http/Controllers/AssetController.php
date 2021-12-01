@@ -455,10 +455,7 @@ class AssetController extends Controller
             'Female',
             'Male'
         ] ;
-
         $dataArr = [];
-
-
         foreach ($names as $name){
             $dataArr[$name] = [];
         }
@@ -466,7 +463,6 @@ class AssetController extends Controller
         foreach ($minLog as $log){
             $dataArr[$log->accessorie][$log->date] = $log->value;
         }
-
 
         return view('types' , [ 'names' => $names, 'minLogs' => $dataArr ]);
 
