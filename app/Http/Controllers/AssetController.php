@@ -468,7 +468,7 @@ class AssetController extends Controller
         }
 
 
-        return view('history' , [ 'names' => $names, 'minLogs' => $dataArr ]);
+        return view('types' , [ 'names' => $names, 'minLogs' => $dataArr ]);
 
     }
 
