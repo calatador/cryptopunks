@@ -512,6 +512,7 @@ class ComposerStaticInit071ae599bd3a6a18aa52de14438993d4
 
     public static $classMap = array (
         'App\\Console\\Commands\\CronHistory' => __DIR__ . '/../..' . '/app/Console/Commands/CronHistory.php',
+        'App\\Console\\Commands\\CronLog' => __DIR__ . '/../..' . '/app/Console/Commands/CronLog.php',
         'App\\Console\\Commands\\CronPrice' => __DIR__ . '/../..' . '/app/Console/Commands/CronPrice.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -530,6 +531,7 @@ class ComposerStaticInit071ae599bd3a6a18aa52de14438993d4
         'App\\Models\\Asset' => __DIR__ . '/../..' . '/app/Models/Asset.php',
         'App\\Models\\AssetAccessories' => __DIR__ . '/../..' . '/app/Models/AssetAccessories.php',
         'App\\Models\\AssetHistory' => __DIR__ . '/../..' . '/app/Models/AssetHistory.php',
+        'App\\Models\\Minlog' => __DIR__ . '/../..' . '/app/Models/Minlog.php',
         'App\\Models\\Options' => __DIR__ . '/../..' . '/app/Models/Options.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

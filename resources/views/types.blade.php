@@ -37,7 +37,7 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                            <h2> - </h2>
+                            <h2> Floor </h2>
 
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
@@ -64,6 +64,15 @@
 
                             </tbody>
                         </table>
+
+
+                        <h2> Available </h2>
+
+
+
+                        <h2> Average Sale </h2>
+
+
 
                     </div>
                 </div>
