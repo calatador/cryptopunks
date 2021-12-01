@@ -117,7 +117,7 @@ class CronHistory extends Command
                             echo $log->id . ' updated';
                             $log->value = $min;
                             $log->forsell = $forSell;
-                            $log->avg = (float) ($somme / $forSell);
+                            $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
 
                             $log->save();
                         }else{
@@ -126,7 +126,7 @@ class CronHistory extends Command
                             $log->accessorie = $name;
                             $log->value = $min;
                             $log->forsell = $forSell;
-                            $log->avg = (float) ($somme / $forSell);
+                            $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
                             $log->save();
                         }
                 }
