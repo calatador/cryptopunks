@@ -68,10 +68,60 @@
 
                         <h2> Available </h2>
 
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                            <tr>
+                                <th> Accessories </th>
+                                @foreach($minLogs['Alien'] as $key =>$log)
+                                    <th>{{$key}}</th>
+                                @endforeach
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach($names as $name)
+                                <tr>
+                                    <td> {{$name}}</td>
+                                    @foreach($minLogs[$name] as $key => $log)
+                                        <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log}}</a></td>
+                                    @endforeach
+
+                                </tr>
+                            @endforeach
+
+
+
+                            </tbody>
+                        </table>
 
 
                         <h2> Average Sale </h2>
 
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                            <tr>
+                                <th> Accessories </th>
+                                @foreach($minLogs['Alien'] as $key =>$log)
+                                    <th>{{$key}}</th>
+                                @endforeach
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach($names as $name)
+                                <tr>
+                                    <td> {{$name}}</td>
+                                    @foreach($minLogs[$name] as $key => $log)
+                                        <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log}}</a></td>
+                                    @endforeach
+
+                                </tr>
+                            @endforeach
+
+
+
+                            </tbody>
+                        </table>
 
 
                     </div>
