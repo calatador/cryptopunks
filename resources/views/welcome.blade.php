@@ -98,6 +98,10 @@
                                     <div class="ml-4 text-lg leading-7 font-semibold">
                                         <a href="./history" class="underline text-gray-900 dark:text-white"> Attributes</a>
                                     </div>
+
+                                    <div class="ml-4 text-lg leading-7 font-semibold">
+                                        <a href="./theTypes" class="underline text-gray-900 dark:text-white"> theTypes </a>
+                                    </div>
                                 </div>
 
 

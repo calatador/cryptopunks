@@ -446,4 +446,30 @@ class AssetController extends Controller
 
     }
 
+    public function theTypes(){
+
+        $names = [
+            'Alien',
+            'Ape',
+            'Zombie',
+            'Female',
+            'Male'
+        ] ;
+
+        $dataArr = [];
+
+
+        foreach ($names as $name){
+            $dataArr[$name] = [];
+        }
+        $minLog = Minlog::whereIn('accessorie', $names)->get();
+        foreach ($minLog as $log){
+            $dataArr[$log->accessorie][$log->date] = $log->value;
+        }
+
+
+        return view('history' , [ 'names' => $names, 'minLogs' => $dataArr ]);
+
+    }
+
 }

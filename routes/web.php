@@ -24,6 +24,7 @@ Route::get('/month',[AssetController::class, 'month']);
 
 Route::get('/test',[AssetController::class, 'test']);
 Route::get('/history',[AssetController::class, 'history']);
+Route::get('/theTypes',[AssetController::class, 'theTypes']);
 
 
 
