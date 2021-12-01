@@ -84,6 +84,7 @@ class CronHistory extends Command
                                 $asset->price = $s->eth;
                                 $forSell++;
                                 $somme = $somme + $asset->price;
+                                echo $asset->price . '-';
                                 break;
                             } else {
                                 break;
