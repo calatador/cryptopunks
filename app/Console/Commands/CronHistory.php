@@ -90,9 +90,10 @@ class CronHistory extends Command
                             }
                         }
                     }
-                    echo $somme . '/' . $forSell ;
+                    echo $somme . '/' . $forSell  . '=';
 
                     echo number_format((float)($somme / $forSell), 2, '.', '');
+
 die();
                     foreach ($assets as $key => $asset) {
                         if ($asset->price == -1) {
