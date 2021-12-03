@@ -44,7 +44,9 @@ class CronHistory extends Command
         $c = new CronController();
         $hello = 0 ;
         while (true){
-     //   $c->syncHistory();
+        $c->syncHistory();
+        die();
+
 
         if( $hello == 0){
             $nbrDays = 365;

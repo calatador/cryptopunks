@@ -37,59 +37,9 @@ class CronController extends Controller
             echo 'done';
         }
 
-        public function syncHistory(){
-        $option = Options::where('option' , '=' , 'syncHistorySatus' )->first();
-        if ($option instanceof Options){
-            $option->values = 'working';
-            $option->update();
-        }else{
-            $option = new Options();
-            $option->option = 'syncHistorySatus';
-            $option->values = 'working';
-            $option->save();
-        }
-
-        $optionSatus = Options::where('option' , '=' , 'syncHistoryId')->first();
-        if( !$optionSatus instanceof $option){
-            $optionSatus = new Options();
-            $optionSatus->option = 'syncHistoryId';
-            $optionSatus->values = '0';
-            $optionSatus->save();
-        }
-
-            set_time_limit(0);
-            //initAssets
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, 'https://raw.githubusercontent.com/gabrielhicks/cryptoPunksAPI/main/cryptoPunkData.json');
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-            $json_data =  curl_exec($ch);
-            $json_data = json_decode($json_data);
-            ini_set('max_execution_time', 0);
-                foreach ( $json_data as $key => $json) {
-                    $id = intval($key);
-                    Asset::assetSecInit($json, $id);
-                   $optionSatus->values = $id;
-                    $optionSatus->save();
-                }
-                echo 'done';
-
-            $option = Options::where('option' , '=' , 'syncHistorySatus' )->first();
-            if ($option instanceof Options){
-                $option->values = 'done';
-                $option->update();
-            }else{
-                $option = new Options();
-                $option->option = 'done';
-                $option->values = 'done';
-                $option->save();
-            }
-    }
 
 
-        public function syncPrice2(){
+    public function syncPrice2(){
             $historys = AssetHistory::where( 'sync' , '=' , 0)
                 ->where('type' , '=' , 'Bid Withdrawn')->get();
             foreach ($historys as $h){
@@ -237,6 +187,54 @@ class CronController extends Controller
     }
 
 
+    public function syncHistory(){
+        set_time_limit(0);
+        $option = Options::where('option' , '=' , 'syncHistorySatus' )->first();
+        if ($option instanceof Options){
+            $option->values = 'working';
+            $option->update();
+        }else{
+            $option = new Options();
+            $option->option = 'syncHistorySatus';
+            $option->values = 'working';
+            $option->save();
+        }
+        $optionSatus = Options::where('option' , '=' , 'syncHistoryId')->first();
+        if( !$optionSatus instanceof $option){
+            $optionSatus = new Options();
+            $optionSatus->option = 'syncHistoryId';
+            $optionSatus->values = '0';
+            $optionSatus->save();
+        }
+        //initAssets
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, 'https://raw.githubusercontent.com/gabrielhicks/cryptoPunksAPI/main/cryptoPunkData.json');
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        $json_data =  curl_exec($ch);
+        $json_data = json_decode($json_data);
+        ini_set('max_execution_time', 0);
+        foreach ( $json_data as $key => $json) {
+            $id = intval($key);
+            Asset::assetSecInit($json, $id);
+            $optionSatus->values = $id;
+            $optionSatus->save();
+        }
+        echo 'done';
+
+        $option = Options::where('option' , '=' , 'syncHistorySatus' )->first();
+        if ($option instanceof Options){
+            $option->values = 'done';
+            $option->update();
+        }else{
+            $option = new Options();
+            $option->option = 'done';
+            $option->values = 'done';
+            $option->save();
+        }
+    }
 
 
 }
