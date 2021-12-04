@@ -219,7 +219,7 @@ class Asset extends Model
                  $peth = $peth * $f1;
                  echo $peth;
 
-                 $peth = number_format($peth * $f1 , 2 , '' ,'');
+                 $peth = number_format($peth * $f1 , 2 , '.' ,'');
 
 
                  die();
