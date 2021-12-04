@@ -220,7 +220,7 @@ class CronController extends Controller
             $id = intval($key);
             if( $id == 6174){
                 echo  $id;
-                //Asset::assetSecInit($json, $id);
+                Asset::assetSecInit($json, $id);
 
             }
            // $optionSatus->values = $id;
