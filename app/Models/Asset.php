@@ -280,6 +280,9 @@ class Asset extends Model
 
                  $peth = str_replace( ',' , '' , $prices[0] );
                  echo '(' . $peth . "-" .  $prices[1] . ')';
+                 var_dump($peth);
+                 die();
+
                  $peth = $peth * $f1;
                  $peth = number_format($peth * $f1 , 2 , '.' ,'');
 
