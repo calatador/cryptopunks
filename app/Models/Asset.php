@@ -216,7 +216,7 @@ class Asset extends Model
 
                  $pos = strpos($prices[0], '<');
                  if ($pos !== false) {
-                     var_dump($pos);
+                     var_dump($prices[0]);
                      die();
                  }
 
