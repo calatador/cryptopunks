@@ -94,7 +94,7 @@ class CronHistory extends Command
                         $nbrSold++;
                         $sommeSold = $sommeSold + $h->eth;
                     }
-                    if( $nbrSold == 0){
+                    if( $nbrSold != 0){
                         $moySold = $sommeSold / $nbrSold;
                     }else{
                         $moySold = 0;
