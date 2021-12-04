@@ -213,13 +213,19 @@ class Asset extends Model
                  $peth = substr($prices[0],0,-2);
                  $peth = str_replace( ',' , '' , $peth );
                  $peth = number_format($peth * $f1 , 2 , '' ,'');
+
+                 $pusd = substr($prices[1],0,-1);
+                 $pusd = str_replace( ',' , '' , $peth );
+                 $pusd = number_format($peth * $f2 , 2 , '' ,'');
+
+
                  var_dump($peth);
                  die();
                 $prices[0] = str_replace( ',' , '' , $prices[0]);
                 $prices[1] = str_replace( ',' , '' , $prices[1]);
                 $price = [
-                    'eth' => floatval(str_replace( ',' , '.' , $peth )) * $f1    ,
-                    'usd' => floatval(str_replace( ',' , '.' , substr($prices[1] , 2 , -1)) ) * $f2
+                    'eth' => $peth   ,
+                    'usd' => $pusd
                 ];
                 $aDataTableDetailHTML[$key][3] = $price;
             }
