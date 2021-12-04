@@ -210,7 +210,7 @@ class Asset extends Model
                      $f2 = 1000000000;
                  }
 
-                 $peth = floatval(substr($prices[0],0,-2));
+                 $peth = substr($prices[0],0,-2);
                  var_dump($peth);
                  die();
                 $prices[0] = str_replace( ',' , '' , $prices[0]);
