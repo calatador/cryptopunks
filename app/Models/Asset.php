@@ -181,9 +181,9 @@ class Asset extends Model
                  $prices[0] = substr($prices[0],0,-2);
                  $prices[1] = substr($prices[1],0,-1);
                 $pos = strpos($prices[0], 'K');
+                var_dump($f1);
                 if ($pos !== false) {
-                    die();
-                    $prices[0] = str_replace( 'K' , '' , $prices[0]);
+                     $prices[0] = str_replace( 'K' , '' , $prices[0]);
                     $f1 = 1000;
                  }
                 $pos = strpos($prices[0], 'M');
