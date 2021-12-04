@@ -210,12 +210,13 @@ class Asset extends Model
                      $f2 = 1000000000;
                  }
 
-                 var_dump($prices[0]);
+                 $peth = floatval(substr($prices[0],0,-2));
+                 var_dump($peth);
                  die();
                 $prices[0] = str_replace( ',' , '' , $prices[0]);
                 $prices[1] = str_replace( ',' , '' , $prices[1]);
                 $price = [
-                    'eth' => floatval(str_replace( ',' , '.' , floatval(substr($prices[0],0,-2)) )) * $f1    ,
+                    'eth' => floatval(str_replace( ',' , '.' , $peth )) * $f1    ,
                     'usd' => floatval(str_replace( ',' , '.' , substr($prices[1] , 2 , -1)) ) * $f2
                 ];
                 $aDataTableDetailHTML[$key][3] = $price;
