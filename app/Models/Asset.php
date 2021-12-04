@@ -195,8 +195,6 @@ class Asset extends Model
                      $prices[0] = str_replace( 'Y' , '' , $prices[0]);
                      $f1 = 1000000000;
                  }
-                 var_dump($f1);
-
                  $f2 = 1;
                 $pos = strpos($prices[1], 'K');
                 if ($pos !== false) {
@@ -218,9 +216,10 @@ class Asset extends Model
 
 
                  $peth = str_replace( ',' , '' , $prices[0] );
+                 echo $peth;
+
                  $peth = number_format($peth * $f1 , 2 , '' ,'');
 
-                 echo $peth;
 
                  die();
 
