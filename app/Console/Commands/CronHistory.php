@@ -44,26 +44,28 @@ class CronHistory extends Command
         $c = new CronController();
         $hello = 0 ;
         while (true){
-        $c->syncHistory();
-        die();
+       // $c->syncHistory();
+     //   die();
 
 
         if( $hello == 0){
-            $nbrDays = 365;
+            $nbrDays = 3;
             $hello = 1;
         }else{
-            $nbrDays = 5;
+            $nbrDays = 3;
         }
 
             set_time_limit(0);
 
             $names = AssetAccessories::get();
-            $t = [ 'Female'];
-            $names = AssetAccessories::whereIn('name' , $t)->get();
+         //   $t = [ 'Female'];
+         //   $names = AssetAccessories::whereIn('name' , $t)->get();
 
             foreach ( $names as $name) {
                 $name = $name->name;
-                $dateinit = date('Y-m-d', time());
+                echo '----------------'.$name . '--------------';
+                echo "\n";
+                    $dateinit = date('Y-m-d', time());
                 $dateinit = date('Y-m-d', strtotime($dateinit . ' +' . 1 . ' day'));
                 $date = $dateinit;
                 for ($i = 0; $i < $nbrDays; $i++) {
