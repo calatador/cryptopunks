@@ -178,6 +178,8 @@ class Asset extends Model
              if( $item[3] != ''){
                 $prices = explode(" ", $item[3]);
                 $f1 = 1;
+                 $prices[0] = substr($prices[0],0,-2);
+                 $prices[1] = substr($prices[1],0,-1);
                 $pos = strpos($prices[0], 'K');
                 if ($pos !== false) {
                     $prices[0] = str_replace( 'K' , '' , $prices[0]);
@@ -210,12 +212,11 @@ class Asset extends Model
                      $f2 = 1000000000;
                  }
 
-                 $peth = substr($prices[0],0,-2);
-                 $peth = str_replace( ',' , '' , $peth );
+
+                 $peth = str_replace( ',' , '' , $prices[0] );
                  $peth = number_format($peth * $f1 , 2 , '' ,'');
 
-                 $pusd = substr($prices[1],0,-1);
-                 $pusd = str_replace( ',' , '' , $peth );
+                 $pusd = str_replace( ',' , '' , $prices[1] );
                  $pusd = number_format($peth * $f2 , 2 , '' ,'');
 
 
