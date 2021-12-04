@@ -209,6 +209,9 @@ class Asset extends Model
                      $prices[1] = str_replace( 'Y' , '' , $prices[1]);
                      $f2 = 1000000000;
                  }
+
+                 var_dump($prices[0]);
+                 die();
                 $prices[0] = str_replace( ',' , '' , $prices[0]);
                 $prices[1] = str_replace( ',' , '' , $prices[1]);
                 $price = [
