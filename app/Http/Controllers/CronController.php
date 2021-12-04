@@ -219,7 +219,7 @@ class CronController extends Controller
         foreach ( $json_data as $key => $json) {
             $id = intval($key);
             if( $id == 4722){
-                echo  $id;
+                echo  $id .' --------';
                 Asset::assetSecInit($json, $id);
 
             }
