@@ -218,10 +218,15 @@ class CronController extends Controller
         ini_set('max_execution_time', 0);
         foreach ( $json_data as $key => $json) {
             $id = intval($key);
-            Asset::assetSecInit($json, $id);
-            $optionSatus->values = $id;
-            $optionSatus->save();
+            if( $id == 6174){
+                echo  $id;
+                //Asset::assetSecInit($json, $id);
+
+            }
+           // $optionSatus->values = $id;
+           // $optionSatus->save();
         }
+        die();
         echo 'done';
 
         $option = Options::where('option' , '=' , 'syncHistorySatus' )->first();
