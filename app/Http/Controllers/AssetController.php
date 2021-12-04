@@ -463,7 +463,7 @@ class AssetController extends Controller
         foreach ($minLog as $log){
             $dataArr[$log->accessorie][$log->date] =
                 [ 'date' => $log->date, 'value' => $log->value ,
-                    'sold' => $log->nbrsold , 'soldavg' => $log->sommesold
+                    'sold' => $log->nbrsold , 'soldavg' => $log->sommesold , 'forsell' => $log->forsell
                     ];
         }
 
