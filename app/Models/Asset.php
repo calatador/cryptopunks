@@ -141,11 +141,6 @@ class Asset extends Model
         } while ($a);
 
 
-
-
-
-
-
         $first_step = explode( '<div id="punkHistory">' , $data );
         $second_step = explode("</div>" , $first_step[1] );
         $first_step = explode( '<div class="table-responsive">' , $data );
@@ -193,6 +188,11 @@ class Asset extends Model
                     $prices[0] = str_replace( 'M' , '' , $prices[0]);
                     $f1 = 1000000;
                  }
+                 $pos = strpos($prices[0], 'Y');
+                 if ($pos !== false) {
+                     $prices[0] = str_replace( 'Y' , '' , $prices[0]);
+                     $f1 = 1000000000;
+                 }
                 $f2 = 1;
                 $pos = strpos($prices[1], 'K');
                 if ($pos !== false) {
@@ -203,6 +203,11 @@ class Asset extends Model
                 if ($pos !== false) {
                     $prices[1] = str_replace( 'M' , '' , $prices[1]);
                     $f2 = 1000000;
+                 }
+                 $pos = strpos($prices[1], 'Y');
+                 if ($pos !== false) {
+                     $prices[1] = str_replace( 'Y' , '' , $prices[1]);
+                     $f2 = 1000000000;
                  }
                 $prices[0] = str_replace( ',' , '' , $prices[0]);
                 $prices[1] = str_replace( ',' , '' , $prices[1]);
