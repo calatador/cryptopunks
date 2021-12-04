@@ -45,15 +45,15 @@ class CronHistory extends Command
         $c = new CronController();
         $hello = 0 ;
         while (true){
-        $c->syncHistory();
-        die();
+      //  $c->syncHistory();
+       // die();
 
 
         if( $hello == 0){
-            $nbrDays = 2;
+            $nbrDays = 3;
             $hello = 1;
         }else{
-            $nbrDays = 2;
+            $nbrDays = 3;
         }
 
             set_time_limit(0);
