@@ -223,8 +223,7 @@ class CronController extends Controller
            // $optionSatus->values = $id;
            // $optionSatus->save();
         }
-        die();
-        echo 'done';
+
 
         $option = Options::where('option' , '=' , 'syncHistorySatus' )->first();
         if ($option instanceof Options){
