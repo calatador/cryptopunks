@@ -54,7 +54,7 @@
                             <tr>
                                 <td> {{$name}}</td>
                                 @foreach($minLogs[$name] as $key => $log)
-                                    <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log}}</a></td>
+                                    <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log['value']}}</a></td>
                                 @endforeach
 
                             </tr>
@@ -83,7 +83,7 @@
                                 <tr>
                                     <td> {{$name}}</td>
                                     @foreach($minLogs[$name] as $key => $log)
-                                        <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log}}</a></td>
+                                        <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log['sold']}}</a></td>
                                     @endforeach
 
                                 </tr>
@@ -112,7 +112,7 @@
                                 <tr>
                                     <td> {{$name}}</td>
                                     @foreach($minLogs[$name] as $key => $log)
-                                        <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log}}</a></td>
+                                        <td><a href="/list?date={{$key}}&assets%5B%5D={{$name}}">{{$log['soldavg']}}</a></td>
                                     @endforeach
 
                                 </tr>

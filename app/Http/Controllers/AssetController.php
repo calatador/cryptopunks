@@ -461,7 +461,10 @@ class AssetController extends Controller
         }
         $minLog = Minlog::whereIn('accessorie', $names)->get();
         foreach ($minLog as $log){
-            $dataArr[$log->accessorie][$log->date] = $log->value;
+            $dataArr[$log->accessorie][$log->date] =
+                [ 'date' => $log->date, 'value' => $log->value ,
+                    'sold' => $log->nbrsold , 'soldavg' => $log->sommesold
+                    ];
         }
 
         return view('types' , [ 'names' => $names, 'minLogs' => $dataArr ]);
