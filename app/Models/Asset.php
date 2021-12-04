@@ -180,7 +180,7 @@ class Asset extends Model
                 $f1 = 1;
                  $prices[0] = substr($prices[0],0,-2);
                  $prices[1] = substr($prices[1],0,-1);
-                 $prices[1] = substr($prices[1],1,strlen($prices[1]));
+                 $prices[1] = substr($prices[1],2,strlen($prices[1]));
 
                  $pos = strpos($prices[0], 'K');
                 if ($pos !== false) {
