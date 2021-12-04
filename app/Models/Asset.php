@@ -76,8 +76,7 @@ class Asset extends Model
         $asset = Asset::where('num' , '=' , $id)->first();
         $historys = $asset->getLiveHistory();
 
-        var_dump($historys);
-        die();
+
 
 
         foreach (array_reverse($historys) as $item){
