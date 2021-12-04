@@ -181,7 +181,6 @@ class Asset extends Model
                  $prices[0] = substr($prices[0],0,-2);
                  $prices[1] = substr($prices[1],0,-1);
                 $pos = strpos($prices[0], 'K');
-                var_dump($f1);
                 if ($pos !== false) {
                      $prices[0] = str_replace( 'K' , '' , $prices[0]);
                     $f1 = 1000;
@@ -196,7 +195,9 @@ class Asset extends Model
                      $prices[0] = str_replace( 'Y' , '' , $prices[0]);
                      $f1 = 1000000000;
                  }
-                $f2 = 1;
+                 var_dump($f1);
+
+                 $f2 = 1;
                 $pos = strpos($prices[1], 'K');
                 if ($pos !== false) {
                     $prices[1] = str_replace( 'K' , '' , $prices[1]);
