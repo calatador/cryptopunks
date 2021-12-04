@@ -214,10 +214,15 @@ class Asset extends Model
                  }
 
 
+                 $pos = strpos($prices[0], '<');
+                 if ($pos !== false) {
+                     var_dump($pos);
+                     die();
+                 }
 
 
                  $peth = str_replace( ',' , '' , $prices[0] );
-                 echo $peth . "-";
+                 //echo $peth . "-";
                  $peth = $peth * $f1;
                  $peth = number_format($peth * $f1 , 2 , '.' ,'');
 
