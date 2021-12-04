@@ -284,8 +284,7 @@ class Asset extends Model
 
 
                  $peth = number_format($peth  , 2 , '.' ,'');
-                 var_dump($peth);
-                 die();
+
 
                  $pusd = str_replace( ',' , '' , $prices[1] );
                  $pusd = number_format($pusd * $f2 , 2 , '' ,'');
