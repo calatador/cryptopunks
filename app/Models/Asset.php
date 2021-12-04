@@ -77,8 +77,6 @@ class Asset extends Model
         $historys = $asset->getLiveHistory();
 
 
-        var_dump($historys);
-        die();
 
         foreach (array_reverse($historys) as $item){
                 $his = AssetHistory::where('track' , '=' , $item[6] )->where('asset_id' , '=' , $id)->first();
@@ -281,11 +279,7 @@ class Asset extends Model
                  $peth = str_replace( ',' , '' , $prices[0] );
                  echo '(' . $peth . "-" .  $prices[1] . ')';
                  $peth = $peth * $f1;
-
-
                  $peth = number_format($peth  , 2 , '.' ,'');
-
-
                  $pusd = str_replace( ',' , '' , $prices[1] );
                  $pusd = number_format($pusd * $f2 , 2 , '' ,'');
 
