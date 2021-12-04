@@ -50,14 +50,12 @@ class CronHistory extends Command
 
 
         if( $hello == 0){
-            $nbrDays = 3;
+            $nbrDays = 365;
             $hello = 1;
         }else{
             $nbrDays = 3;
         }
-
             set_time_limit(0);
-
             $names = AssetAccessories::get();
          //   $t = [ 'Female'];
          //   $names = AssetAccessories::whereIn('name' , $t)->get();
