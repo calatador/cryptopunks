@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Http\Controllers\CronController;
 use App\Models\Asset;
 use App\Models\AssetAccessories;
+use App\Models\AssetHistory;
 use App\Models\Minlog;
 use Illuminate\Console\Command;
 
@@ -71,7 +72,6 @@ class CronHistory extends Command
                 for ($i = 0; $i < $nbrDays; $i++) {
                     $forSell = 0;
                     $somme = 0;
-
                     $nbr = ($i == 0) ? 0 : 1;
                     $date = date('Y-m-d H:i:s', strtotime($date . ' -' . $nbr . ' day'));
                     $datekey = date('Y-m-d', strtotime($date . ' -' . $nbr . ' day'));
@@ -79,6 +79,27 @@ class CronHistory extends Command
                     $assets = Asset::whereHas('accessoires', function ($q) use ($name) {
                         $q->where('asset_accessories.name', '=', $name);
                     })->get();
+
+                    $ArrOfAssets = [];
+                    foreach ($assets as $asset){
+                        $ArrOfAssets[] = $asset->num;
+                    }
+                    $soldHistory = AssetHistory::whereIn('asset_id' , $ArrOfAssets)
+                        ->where('txn' , '=', $date )
+                        ->where('type' , '=' , 'Sold')
+                        ->get();
+                    $nbrSold = 0;
+                    $sommeSold = 0;
+                    foreach ($soldHistory as $h){
+                        $nbrSold++;
+                        $sommeSold = $sommeSold + $h->eth;
+                    }
+                    if( $nbrSold == 0){
+                        $moySold = $sommeSold / $nbrSold;
+                    }else{
+                        $moySold = 0;
+                    }
+
 
                     foreach ($assets as $asset) {
                         $as = $asset->dateCondition($date)->get();
@@ -124,7 +145,9 @@ class CronHistory extends Command
                             $log->value = $min;
                             $log->forsell = $forSell;
                             $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
-
+                            $log->nbrsold = $nbrSold ;
+                            $log->sommesold= $sommeSold ;
+                            $log->avgsold = $moySold ;
                             $log->save();
                         }else{
                             $log = new Minlog();
@@ -133,6 +156,9 @@ class CronHistory extends Command
                             $log->value = $min;
                             $log->forsell = $forSell;
                             $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
+                            $log->nbrsold = $nbrSold ;
+                            $log->sommesold= $sommeSold ;
+                            $log->avgsold = $moySold ;
                             $log->save();
                         }
                 }

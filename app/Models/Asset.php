@@ -272,18 +272,13 @@ class Asset extends Model
                  $pos = strpos($prices[1], '<');
                  if ($pos !== false) {
                      $prices[1] = substr($prices[1], 1);;
-
                  }
-
-
                  $peth = str_replace( ',' , '' , $prices[0] );
                  echo '(' . $peth . "-" .  $prices[1] . ')';
                  $peth = $peth * $f1;
                  $peth = number_format($peth  , 2 , '.' ,'');
                  $pusd = str_replace( ',' , '' , $prices[1] );
                  $pusd = number_format($pusd * $f2 , 2 , '' ,'');
-
-
 
                 $prices[0] = str_replace( ',' , '' , $prices[0]);
                 $prices[1] = str_replace( ',' , '' , $prices[1]);
