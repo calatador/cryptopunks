@@ -214,10 +214,11 @@ class Asset extends Model
 
 
 
-                 echo $prices[0];
+
+                 $peth = str_replace( ',' , '' , $prices[0] );
+                 echo $peth;
 
                  die();
-                 $peth = str_replace( ',' , '' , $prices[0] );
                  $peth = number_format($peth * $f1 , 2 , '' ,'');
 
                  $pusd = str_replace( ',' , '' , $prices[1] );
