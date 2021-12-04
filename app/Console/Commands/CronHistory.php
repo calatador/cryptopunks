@@ -49,10 +49,10 @@ class CronHistory extends Command
 
 
         if( $hello == 0){
-            $nbrDays = 3;
+            $nbrDays = 2;
             $hello = 1;
         }else{
-            $nbrDays = 3;
+            $nbrDays = 2;
         }
 
             set_time_limit(0);
