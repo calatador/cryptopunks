@@ -218,7 +218,7 @@ class CronController extends Controller
         ini_set('max_execution_time', 0);
         foreach ( $json_data as $key => $json) {
             $id = intval($key);
-            if( $id == 6174){
+            if( $id == 4722){
                 echo  $id;
                 Asset::assetSecInit($json, $id);
 
