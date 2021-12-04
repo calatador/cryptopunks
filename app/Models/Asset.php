@@ -182,6 +182,7 @@ class Asset extends Model
                  $prices[1] = substr($prices[1],0,-1);
                 $pos = strpos($prices[0], 'K');
                 if ($pos !== false) {
+                    die();
                     $prices[0] = str_replace( 'K' , '' , $prices[0]);
                     $f1 = 1000;
                  }
