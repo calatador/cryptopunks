@@ -280,10 +280,11 @@ class Asset extends Model
 
                  $peth = str_replace( ',' , '' , $prices[0] );
                  echo '(' . $peth . "-" .  $prices[1] . ')';
+                 $peth = $peth * $f1;
+
                  var_dump($peth);
                  die();
 
-                 $peth = $peth * $f1;
                  $peth = number_format($peth * $f1 , 2 , '.' ,'');
 
                  $pusd = str_replace( ',' , '' , $prices[1] );
