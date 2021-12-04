@@ -134,7 +134,7 @@ class Asset extends Model
             if ($a) {
                 echo $data;
                 echo 'oups';
-                sleep(30);
+                sleep(5);
             }
 
         } while ($a);
@@ -217,6 +217,11 @@ class Asset extends Model
                  $pos = strpos($prices[0], '<');
                  if ($pos !== false) {
                      $prices[0] = substr($prices[0], 1);;
+
+                 }
+                 $pos = strpos($prices[1], '<');
+                 if ($pos !== false) {
+                     $prices[1] = substr($prices[1], 1);;
 
                  }
 
