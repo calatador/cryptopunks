@@ -144,8 +144,11 @@ class CronHistory extends Command
                             echo $log->id . ' updated';
                             $log->value = $min;
                             $log->forsell = $forSell;
-                            $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
-                            $log->nbrsold = $nbrSold ;
+                            if($forSell == 0 ){
+                                $log->avg = 0;
+                            }else{
+                                $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
+                            }                            $log->nbrsold = $nbrSold ;
                             $log->sommesold= $sommeSold ;
                             $log->avgsold = $moySold ;
                             $log->save();
@@ -155,7 +158,11 @@ class CronHistory extends Command
                             $log->accessorie = $name;
                             $log->value = $min;
                             $log->forsell = $forSell;
-                            $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
+                            if($forSell == 0 ){
+                                $log->avg = 0;
+                            }else{
+                                $log->avg = number_format((float)($somme / $forSell), 2, '.', '');
+                            }
                             $log->nbrsold = $nbrSold ;
                             $log->sommesold= $sommeSold ;
                             $log->avgsold = $moySold ;
