@@ -50,7 +50,7 @@ class CronHistory extends Command
 
 
         if( $hello == 0){
-            $nbrDays = 365;
+            $nbrDays = 3;
             $hello = 1;
         }else{
             $nbrDays = 3;
