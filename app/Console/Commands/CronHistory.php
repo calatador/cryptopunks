@@ -57,9 +57,7 @@ class CronHistory extends Command
         }
             set_time_limit(0);
             $names = AssetAccessories::get();
-            $t = [ 'Choker' , 'Alien' , 'Ape' , 'Zombie' , 'Beanie' , 'Tiara' , 'Orange Side' ,
-                'Buck Teeth' , 'Welding Goggles' , 'Pigtails' , 'Pink With Hat' , 'Top Hat' ,
-                'Rosy Cheeks' , 'Vampire Hair' , 'Clown Hair Green' , 'Front Beard'];
+            $t = [ 'Wild Blonde'];
             $names = AssetAccessories::whereIn('name' , $t)->get() ;
 
             foreach ( $names as $name) {
