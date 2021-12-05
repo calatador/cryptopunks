@@ -95,7 +95,7 @@
                         </table>
 
 
-                        <h2> Average Sale ( one day)</h2>
+                        <h2> Average Sale (one day)</h2>
 
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
