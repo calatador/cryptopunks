@@ -57,10 +57,11 @@ class CronHistory extends Command
         }
             set_time_limit(0);
             $names = AssetAccessories::get();
+            /*
             $t = [ 'Silver Chain' , 'Purple Hair' , 'Gold Chain' , 'Medical Mask' , 'Cap Forward' , 'Front Beard Dark'
             , 'Mohawk Thin'];
             $names = AssetAccessories::whereIn('name' , $t)->get() ;
-
+*/
             foreach ( $names as $name) {
                 $name = $name->name;
                 echo '----------------'.$name . '--------------';
