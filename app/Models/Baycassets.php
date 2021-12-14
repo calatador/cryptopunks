@@ -10,7 +10,7 @@ use DOMDocument;
 
 class Baycassets extends Model
 {
-    protected $table = 'asset_history';
+    protected $table = 'baycassets';
     use HasFactory;
 
 
