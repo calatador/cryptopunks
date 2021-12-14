@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Http\Controllers\CronController;
 
+use App\Models\Baycassets;
 use Illuminate\Console\Command;
 
 class CronBaycassets extends Command
@@ -56,8 +57,22 @@ class CronBaycassets extends Command
         }
 
         foreach ($datas as $key => $data){
-            var_dump($data);
-            die();
+            $in = Baycassets::where('tokenId' , '=' , $key)->firs();
+            if( $in instanceof Baycassets){
+                $in = new Baycassets();
+                $in->tokenId = $data->tokenId;
+                $in->image = $data->image;
+                $in->imageHash = $data->imageHash;
+                $in->save();
+            }else{
+                $in = new Baycassets();
+                $in->tokenId = $data->tokenId;
+                $in->image = $data->image;
+                $in->imageHash = $data->imageHash;
+                $in->save();
+            }
+
+
         }
 
 
