@@ -57,7 +57,7 @@ class CronBaycassets extends Command
         }
 
         foreach ($datas as $key => $data){
-            $in = Baycassets::where('tokenId' , '=' , $key)->firs();
+            $in = Baycassets::where('tokenId' , '=' , $key)->first();
             if( $in instanceof Baycassets){
                 $in = new Baycassets();
                 $in->tokenId = $data->tokenId;
