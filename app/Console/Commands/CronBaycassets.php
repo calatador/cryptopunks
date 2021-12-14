@@ -60,15 +60,15 @@ class CronBaycassets extends Command
             $in = Baycassets::where('tokenId' , '=' , $key)->first();
             if( $in instanceof Baycassets){
                 $in = new Baycassets();
-                $in->tokenId = $data->tokenId;
-                $in->image = $data->image;
-                $in->imageHash = $data->imageHash;
+                $in->tokenId = $data['tokenId'];
+                $in->image = $data['image'];
+                $in->imageHash = $data['imageHash'];
                 $in->save();
             }else{
                 $in = new Baycassets();
-                $in->tokenId = $data->tokenId;
-                $in->image = $data->image;
-                $in->imageHash = $data->imageHash;
+                $in->tokenId = $data['tokenId'];
+                $in->image = $data['image'];
+                $in->imageHash = $data['imageHash'];
                 $in->save();
             }
 
