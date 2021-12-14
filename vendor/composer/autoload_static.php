@@ -511,6 +511,7 @@ class ComposerStaticInit071ae599bd3a6a18aa52de14438993d4
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\CronBaycassets' => __DIR__ . '/../..' . '/app/Console/Commands/CronBaycassets.php',
         'App\\Console\\Commands\\CronHistory' => __DIR__ . '/../..' . '/app/Console/Commands/CronHistory.php',
         'App\\Console\\Commands\\CronLog' => __DIR__ . '/../..' . '/app/Console/Commands/CronLog.php',
         'App\\Console\\Commands\\CronPrice' => __DIR__ . '/../..' . '/app/Console/Commands/CronPrice.php',
@@ -531,6 +532,7 @@ class ComposerStaticInit071ae599bd3a6a18aa52de14438993d4
         'App\\Models\\Asset' => __DIR__ . '/../..' . '/app/Models/Asset.php',
         'App\\Models\\AssetAccessories' => __DIR__ . '/../..' . '/app/Models/AssetAccessories.php',
         'App\\Models\\AssetHistory' => __DIR__ . '/../..' . '/app/Models/AssetHistory.php',
+        'App\\Models\\Baycassets' => __DIR__ . '/../..' . '/app/Models/Baycassets.php',
         'App\\Models\\Minlog' => __DIR__ . '/../..' . '/app/Models/Minlog.php',
         'App\\Models\\Options' => __DIR__ . '/../..' . '/app/Models/Options.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

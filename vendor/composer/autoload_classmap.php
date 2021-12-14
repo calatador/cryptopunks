@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\CronBaycassets' => $baseDir . '/app/Console/Commands/CronBaycassets.php',
     'App\\Console\\Commands\\CronHistory' => $baseDir . '/app/Console/Commands/CronHistory.php',
     'App\\Console\\Commands\\CronLog' => $baseDir . '/app/Console/Commands/CronLog.php',
     'App\\Console\\Commands\\CronPrice' => $baseDir . '/app/Console/Commands/CronPrice.php',
@@ -26,6 +27,7 @@ return array(
     'App\\Models\\Asset' => $baseDir . '/app/Models/Asset.php',
     'App\\Models\\AssetAccessories' => $baseDir . '/app/Models/AssetAccessories.php',
     'App\\Models\\AssetHistory' => $baseDir . '/app/Models/AssetHistory.php',
+    'App\\Models\\Baycassets' => $baseDir . '/app/Models/Baycassets.php',
     'App\\Models\\Minlog' => $baseDir . '/app/Models/Minlog.php',
     'App\\Models\\Options' => $baseDir . '/app/Models/Options.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
