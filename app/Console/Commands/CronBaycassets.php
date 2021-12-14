@@ -39,7 +39,21 @@ class CronBaycassets extends Command
      */
     public function handle()
     {
-        echo 'baycassets';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, 'https://ipfs.io/ipfs/Qme57kZ2VuVzcj5sC3tVHFgyyEgBTmAnyTK45YVNxKf6hi');
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        $json_data =  curl_exec($ch);
+        $json_data = json_decode($json_data);
+        ini_set('max_execution_time', 0);
+        foreach ( $json_data as $key => $json) {
+            var_dump($json);
+            die();
+        }
+
+
         return Command::SUCCESS;
     }
 }
