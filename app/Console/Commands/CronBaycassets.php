@@ -48,9 +48,15 @@ class CronBaycassets extends Command
         $json_data =  curl_exec($ch);
         $json_data = json_decode($json_data);
         ini_set('max_execution_time', 0);
+        $datas = null;
         foreach ( $json_data as $key => $json) {
-            var_dump($json);
-            die();
+            if ( $key == 'collection') {
+                $datas = $json;
+            }
+        }
+
+        foreach ($datas as $key => $data){
+            echo $key ;
         }
 
 
