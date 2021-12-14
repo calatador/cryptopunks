@@ -56,7 +56,7 @@ class CronBaycassets extends Command
         }
 
         foreach ($datas as $key => $data){
-            echo $key ;
+           // echo $key ;
         }
 
 
